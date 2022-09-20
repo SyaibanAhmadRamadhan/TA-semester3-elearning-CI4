@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Mahasiswa extends Migration
+class Dosen extends Migration
 {
     public function up()
     {
@@ -16,41 +16,17 @@ class Mahasiswa extends Migration
                 'unsigned'       => true,
 				'auto_increment' => true
             ],
-            'name'       => [
+            'nama'       => [
 				'type'           => 'VARCHAR',
 				'constraint'     => '255'
 			],
-            'email'       => [
+			'alamat'      => [
 				'type'           => 'VARCHAR',
-				'constraint'     => '255'
-			],
-            'NISN'       => [
-				'type'           => 'VARCHAR',
-				'constraint'     => '255'
-			],
-			'NPSN'       => [
-				'type'           => 'VARCHAR',
-				'constraint'     => '255'
-			],
-			'no_telepon'       => [
-				'type'           => 'VARCHAR',
-				'constraint'     => '100'
-			],
-            'gender'       => [
-				'type'           => 'ENUM',
-				'constraint'     => ['pria','wanita']
-			],
-            'wali'       => [
-				'type'           => 'VARCHAR',
-				'constraint'     => '100'
+				'constraint'     => 100
 			],
 			'tgl_lahir' => [
 				'type'           => 'TEXT',
 				'null'           => true,
-			],
-			'picture'       => [
-				'type'           => 'VARCHAR',
-				'constraint'     => '255'
 			],
 			'created_at' => [
 				'type'           => 'DATETIME',
@@ -67,12 +43,12 @@ class Mahasiswa extends Migration
 		$this->forge->addKey('id', TRUE);
 
 		// Membuat tabel mahasiswa
-		$this->forge->createTable('mahasiswa', TRUE);
+		$this->forge->createTable('dosen', TRUE);
 		$this->db->enableForeignKeyChecks();
     }
 
     public function down()
     {
-        $this->forge->dropTable('mahasiswa');
+        $this->forge->dropTable('dosen');
     }
 }

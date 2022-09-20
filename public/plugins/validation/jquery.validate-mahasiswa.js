@@ -20,6 +20,10 @@ jQuery('.form-valide').validate({
       required: !0,
       minlength: 5,
     },
+    wali: {
+      required: !0,
+      minlength: 5,
+    },
     alamat: {
       required: !0,
       minlength: 10,
@@ -27,59 +31,42 @@ jQuery('.form-valide').validate({
     tgl_lahir: {
       required: !0,
     },
-    // 'val-password': {
-    //   required: !0,
-    //   minlength: 5,
-    // },
-    // 'val-confirm-password': {
-    //   required: !0,
-    //   equalTo: '#val-password',
-    // },
-    role: {
+    gender: {
       required: !0,
     },
-    // "val-select2-multiple": {
-    //     required: !0,
-    //     minlength: 2
-    // },
-    // "val-suggestions": {
-    //     required: !0,
-    //     minlength: 5
-    // },
-    // "val-skill": {
-    //     required: !0
-    // },
-    // "val-currency": {
-    //     required: !0,
-    //     currency: ["$", !0]
-    // },
-    // "val-website": {
-    //     required: !0,
-    //     url: !0
-    // },
-    // "val-phoneus": {
-    //     required: !0,
-    //     phoneUS: !0
-    // },
-    // "val-digits": {
-    //     required: !0,
-    //     digits: !0
-    // },
-    // "val-number": {
-    //     required: !0,
-    //     number: !0
-    // },
-    // "val-range": {
-    //     required: !0,
-    //     range: [1, 5]
-    // },
-    // "val-terms": {
-    //     required: !0
-    // }
+    provinsi: {
+      required: !0,
+    },
+    kabupaten: {
+      required: !0,
+    },
+    kecamatan: {
+      required: !0,
+    },
+    desa: {
+      required: !0,
+    },
+    email: { required: !0, email: !0 },
+    nisn: {
+      required: !0,
+      digits: !0,
+    },
+    npsn: {
+      required: !0,
+      digits: !0,
+    },
+    no_telepon: {
+      required: !0,
+      digits: !0,
+    },
   },
   messages: {
     name: {
       required: 'Masukan Nama Panjang',
+      minlength: 'Minimal 5 character',
+    },
+    wali: {
+      required: 'Masukan Nama Wali',
       minlength: 'Minimal 5 character',
     },
     alamat: {
@@ -89,7 +76,13 @@ jQuery('.form-valide').validate({
     tgl_lahir: {
       required: 'Masukan Tanggal Lahir',
     },
-    // 'val-email': 'Please enter a valid email address',
+    gender: {
+      required: 'Masukan Jenis Kelamin',
+    },
+    no_telepon: {
+      required: 'Masukan nomer telepon',
+    },
+    email: 'Masukan Email Dengan Benar',
     // 'val-password': {
     //   required: 'Please provide a password',
     //   minlength: 'Your password must be at least 5 characters long',
@@ -99,14 +92,14 @@ jQuery('.form-valide').validate({
     //   minlength: 'Your password must be at least 5 characters long',
     //   equalTo: 'Please enter the same password as above',
     // },
-    role: 'Please select a value!',
     // 'val-select2-multiple': 'Please select at least 2 values!',
     // 'val-suggestions': 'What can we do to become better?',
     // 'val-skill': 'Please select a skill!',
     // 'val-currency': 'Please enter a price!',
     // 'val-website': 'Please enter your website!',
     // 'val-phoneus': 'Please enter a US phone!',
-    // 'val-digits': 'Please enter only digits!',
+    nisn: 'Masukan Nomer Valid',
+    npsn: 'Masukan Nomer Valid',
     // 'val-number': 'Please enter a number!',
     // 'val-range': 'Please enter a number between 1 and 5!',
     // 'val-terms': 'You must agree to the service terms!',
