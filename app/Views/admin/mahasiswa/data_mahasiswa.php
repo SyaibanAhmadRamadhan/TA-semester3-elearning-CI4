@@ -42,7 +42,7 @@
                                             <?php foreach($mahasiswa as $x): ?>
                                                 <tr>
                                                     <td><?= $x['id'] ?></td>
-                                                    <td><?= $x['nama']?></td>
+                                                    <td><?= $x['name']?></td>
                                                     <td><?= $x['tgl_lahir']?></td>
                                                     <td>
                                                         <a href="<?= base_url('admin/mahasiswa/'.$x['id'].'/detail') ?>" class="btn btn-sm btn-outline-secondary" target="_blank">Preview</a>

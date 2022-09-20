@@ -8,7 +8,7 @@ class AdminController extends BaseController
 {
     public function index()
     {
-        return view('admin/mahasiswa/index_admin',[
+        return view('admin/index_admin',[
             "title" => "admin"
         ]);
     }

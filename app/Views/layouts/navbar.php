@@ -167,7 +167,7 @@
                         <div class="dropdown-content-body">
                             <ul>
                                 <li>
-                                    <a href="app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
+                                    <a href="app-profile.html"><i class="icon-user"></i> <span><?= session()->get('name') ?></span></a>
                                 </li>
                                 <li>
                                     <a href="javascript:void()">
@@ -179,7 +179,7 @@
                                 <li>
                                     <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
                                 </li>
-                                <li><a href="page-login.html"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                <li><a href="<?= base_url('logout') ?>"><i class="icon-key"></i> <span>Logout</span></a></li>
                             </ul>
                         </div>
                     </div>

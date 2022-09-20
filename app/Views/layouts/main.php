@@ -20,7 +20,8 @@
         <link href="<?= base_url('plugins/tables/css/datatable/dataTables.bootstrap4.min.css') ?>" rel="stylesheet">
     <?php endif; ?>
     <!-- Custom Stylesheet -->
-
+        <script src="<?= base_url('js/jquery-3.3.1.min.js') ?>"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 </head>
 
 <body <?= esc($title) == 'login' ? "class='h-100'": ""?> >
@@ -91,7 +92,43 @@
         <script src=" <?= base_url('js/dashboard/dashboard-1.js')?>"></script>
     <?php endif; ?>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <script type="text/javascript">
+        $('.filter_wilayah').select2({
+            theme: "classic"
+        });
 
+    </script>
+
+    <script>
+        $("body").on("click", "#btnSubmit", function() {
+        var allowedFiles = [".png", ".jpg", ".jpeg"];
+        var fileUpload = $("#picture");
+        var lblError = $("#lblError");
+        var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
+        let file = document.getElementById("picture").files[0];
+        if (file == undefined){
+            let action = document.querySelector('#action')
+                action.value = "true"
+        }else{
+            let action = document.querySelector('#action')
+                action.value = "false"
+        }
+        console.log(action)
+        if (file.size > 2097152) {
+            lblError.html("file terlalu besar, max file 2mb");
+            return false;
+        }
+        if (fileUpload.val().toLowerCase()) {
+            if (!regex.test(fileUpload.val().toLowerCase())) {
+                lblError.html("Gunakan Extension: <b>" + allowedFiles.join(' ') + "</b> only.");
+                return false;
+            }
+            lblError.html('');
+            return true;
+        }
+    });
+    </script>
 </body>
 
 </html>
