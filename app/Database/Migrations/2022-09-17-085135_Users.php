@@ -22,16 +22,14 @@ class Users extends Migration
                 'unsigned'       => true,
                 'null'=>true
             ],
-            'id_dosen' => [
-                'type'=>'INT',
+            'nim_dosen' => [
+                'type'=>'VARCHAR',
                 'constraint' => 12,
-                'unsigned'       => true,
                 'null'=>true
             ],
-            'id_mahasiswa' => [
-                'type'=>'INT',
+            'nim_mahasiswa' => [
+                'type'=>'VARCHAR',
                 'constraint' => 12,
-                'unsigned'       => true,
                 'null'=>true
             ],
 			'role'      => [
@@ -58,8 +56,8 @@ class Users extends Migration
 		$this->forge->addKey('id', TRUE);
 
         $this->forge->addForeignKey('id_admin','admin','id','CASCADE', 'CASCADE');
-        $this->forge->addForeignKey('id_dosen','dosen','id','CASCADE', 'CASCADE');
-        $this->forge->addForeignKey('id_mahasiswa','mahasiswa','id','CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('nim_dosen','dosen','nim','CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('nim_mahasiswa','mahasiswa','nim','CASCADE', 'CASCADE');
 		// Membuat tabel mahasiswa
 		$this->forge->createTable('user', TRUE);
         $this->db->enableForeignKeyChecks();

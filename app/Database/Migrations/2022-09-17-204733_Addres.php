@@ -21,16 +21,14 @@ class Addres extends Migration
                 'unsigned'       => true,
                 'null'=>true
             ],
-            'id_dosen' => [
-                'type'=>'INT',
+            'nim_dosen' => [
+                'type'=>'VARCHAR',
                 'constraint' => 12,
-                'unsigned'       => true,
                 'null'=>true
             ],
-            'id_mahasiswa' => [
-                'type'=>'INT',
+            'nim_mahasiswa' => [
+                'type'=>'VARCHAR',
                 'constraint' => 12,
-                'unsigned'       => true,
                 'null'=>true
             ],
 			'id_desa' => [
@@ -72,8 +70,8 @@ class Addres extends Migration
 		$this->forge->addKey('id', TRUE);
 
         $this->forge->addForeignKey('id_admin','admin','id','CASCADE', 'CASCADE');
-        $this->forge->addForeignKey('id_dosen','dosen','id','CASCADE', 'CASCADE');
-        $this->forge->addForeignKey('id_mahasiswa','mahasiswa','id','CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('nim_dosen','dosen','nim','CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('nim_mahasiswa','mahasiswa','nim','CASCADE', 'CASCADE');
         // $this->forge->addForeignKey('id_desa','wilayah_desa','id');
         $this->forge->addForeignKey('id_kabupaten','wilayah_kabupaten','id','CASCADE', 'CASCADE');
         $this->forge->addForeignKey('id_provinsi','wilayah_provinsi','id','CASCADE', 'CASCADE');

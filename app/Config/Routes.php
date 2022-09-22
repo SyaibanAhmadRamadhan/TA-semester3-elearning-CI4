@@ -1,13 +1,14 @@
-<?php namespace Config;
+<?php
+
+namespace Config;
 
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
 
 // Load the system's routing file first, so that the app and ENVIRONMENT
 // can override as needed.
-if (file_exists(SYSTEMPATH . 'Config/Routes.php'))
-{
-	require SYSTEMPATH . 'Config/Routes.php';
+if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
+    require SYSTEMPATH . 'Config/Routes.php';
 }
 
 /**
@@ -31,20 +32,23 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 // routes login carissa sisca
-$routes->get('/login','LoginController::index');
-$routes->post('/login','LoginController::login');
-$routes->get('/logout','LoginController::logout');
+
+$routes->get('/login', 'LoginController::index');
+$routes->post('/login', 'LoginController::login');
+$routes->get('/logout', 'LoginController::logout');
+$routes->get('/', 'AdminController::index');
 
 // admin
-$routes->group('admin',['filter' => 'usersAuth'],function($routes){
-    $routes->get('/','AdminController::index');
+$routes->group('admin', ['filter' => 'usersAuth'], function ($routes) {
+    $routes->get('/', 'AdminController::index');
 
     // mahasiswa
-    $routes->add('mahasiswa/add','MahasiswaController::addMahasiswa');
-    $routes->get('mahasiswa','MahasiswaController::dataMahasiswa');
-    $routes->get('mahasiswa/(:segment)/detail','MahasiswaController::detailMahasiswa/$1');
-    $routes->add('mahasiswa/(:segment)/edit','MahasiswaController::editMahasiswa/$1');
-    $routes->get('mahasiswa/(:segment)/delete','MahasiswaController::deleteMahasiswa/$1');
+    $routes->post('mahasiswa/update/semester', 'MahasiswaController::updateSemester');
+    $routes->add('mahasiswa/add', 'MahasiswaController::addMahasiswa');
+    $routes->get('mahasiswa', 'MahasiswaController::dataMahasiswa');
+    $routes->get('mahasiswa/(:segment)/detail', 'MahasiswaController::detailMahasiswa/$1');
+    $routes->add('mahasiswa/(:segment)/edit', 'MahasiswaController::editMahasiswa/$1');
+    $routes->get('mahasiswa/(:segment)/delete', 'MahasiswaController::deleteMahasiswa/$1');
 });
 
 /**
@@ -60,7 +64,6 @@ $routes->group('admin',['filter' => 'usersAuth'],function($routes){
  * You will have access to the $routes object within that file without
  * needing to reload it.
  */
-if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php'))
-{
-	require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
+if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
+    require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
 }

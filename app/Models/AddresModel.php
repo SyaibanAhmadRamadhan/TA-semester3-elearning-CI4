@@ -10,7 +10,7 @@ class AddresModel extends Model
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $allowedFields    = [
-        'id_admin','id_mahasiswa','id_dosen','id_desa','id_kecamatan','id_kabupaten','id_provinsi','detail_alamat'
+        'id_admin','nim_mahasiswa','nim_dosen','id_desa','id_kecamatan','id_kabupaten','id_provinsi','detail_alamat'
     ];
 
     // Dates
