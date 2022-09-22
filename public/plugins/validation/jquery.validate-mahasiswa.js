@@ -24,6 +24,9 @@ jQuery('.form-valide').validate({
       required: !0,
       minlength: 5,
     },
+    jurusan: {
+      required: !0,
+    },
     alamat: {
       required: !0,
       minlength: 10,
@@ -54,6 +57,9 @@ jQuery('.form-valide').validate({
     npsn: {
       required: !0,
       digits: !0,
+    },
+    asal_sekolah: {
+      required: !0,
     },
     no_telepon: {
       required: !0,

@@ -14,6 +14,20 @@ class LoginController extends BaseController
         ]);
     }
 
+    // public function login(){
+    //     $login    = $this->request->getPost('nim');
+    //     $password = $this->request->getPost('password');
+    //     $remember = (bool) $this->request->getPost('remember');
+
+    //     if (! $this->auth->attempt(['id_admin', $login, 'password' => $password], $remember)) {
+    //         return redirect()->back()->withInput()->with('error', "$this->auth->error()" ?? lang('Auth.badAttempt'));
+    //     }
+
+    //     $redirectURL = session('redirect_url') ?? site_url('/admin');
+    //     unset($_SESSION['redirect_url']);
+
+    //     return redirect()->to($redirectURL)->withCookies()->with('message', lang('Auth.loginSuccess'));
+    // }
     public function login(){
         $user = new UsersModel();
 

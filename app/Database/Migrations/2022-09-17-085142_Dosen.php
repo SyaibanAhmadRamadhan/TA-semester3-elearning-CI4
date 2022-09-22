@@ -10,10 +10,9 @@ class Dosen extends Migration
     {
 		$this->db->disableForeignKeyChecks();
         $this->forge->addField([
-            'id' => [
-                'type'=>'INT',
-                'constraint' => 5,
-                'unsigned'       => true,
+            'nim' => [
+                'type'=>'VARCHAR',
+                'constraint' => 20,
 				'auto_increment' => true
             ],
             'nama'       => [
@@ -40,7 +39,7 @@ class Dosen extends Migration
         ]);
 
         // Membuat primary key
-		$this->forge->addKey('id', TRUE);
+		$this->forge->addKey('nim', TRUE);
 
 		// Membuat tabel mahasiswa
 		$this->forge->createTable('dosen', TRUE);
