@@ -1,4 +1,4 @@
-<?= $this->extend('layouts/main') ?>
+<?= $this->extend('layouts/main1') ?>
 <?= $this->section('content') ?>
 
 <div id="main-wrapper">
@@ -182,11 +182,6 @@
 </div>
 
 <style type="text/css">
-    body {
-        background-color: #f2f6fc;
-        color: #69707a;
-    }
-
     .img-account-profile {
         height: 10rem;
     }

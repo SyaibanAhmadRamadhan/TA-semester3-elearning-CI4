@@ -13,28 +13,55 @@ class WilayahController extends BaseController
 	function valid()
 	{
 		$mahasiswa = new MahasiswaModel();
+		$mahasiswa1 = new MahasiswaModel();
 
 		if ($mahasiswa->where('email', $this->request->getVar('email'))->first()) {
-			$response['validate'] = 'email tidak boleh sama';
-			$response['token'] = csrf_hash();
-			echo json_encode($response);
+			if ($mahasiswa1->where(['email' => $this->request->getVar('email'), 'nim' => $this->request->getVar('nim')])->first()) {
+				$response['validate'] = '';
+				$response['token'] = csrf_hash();
+				echo json_encode($response);
+			} else if ($mahasiswa->where('email', $this->request->getVar('email'))->first()) {
+				$response['validate'] = 'email tidak boleh sama';
+				$response['token'] = csrf_hash();
+				echo json_encode($response);
+			} else {
+				$response['validate'] = '';
+				$response['token'] = csrf_hash();
+				echo json_encode($response);
+			}
 		} else if ($mahasiswa->where('NISN', $this->request->getVar('nisn'))->first()) {
-			$response['validate'] = 'nisn tidak boleh sama';
-			$response['token'] = csrf_hash();
-			echo json_encode($response);
+			if ($mahasiswa1->where(['NISN' => $this->request->getVar('nisn'), 'nim' => $this->request->getVar('nim')])->first()) {
+				$response['validate'] = '';
+				$response['token'] = csrf_hash();
+				echo json_encode($response);
+			} else if ($mahasiswa->where('NISN', $this->request->getVar('nisn'))->first()) {
+				$response['validate'] = 'nisn tidak boleh sama';
+				$response['token'] = csrf_hash();
+				echo json_encode($response);
+			} else {
+				$response['validate'] = '';
+				$response['token'] = csrf_hash();
+				echo json_encode($response);
+			}
 		} else if ($mahasiswa->where('no_telepon', $this->request->getPost('no_telepon'))->first()) {
-			$response['validate'] = 'no_telepon tidak boleh sama';
-			$response['token'] = csrf_hash();
-			echo json_encode($response);
+			if ($mahasiswa1->where(['no_telepon' => $this->request->getVar('no_telepon'), 'nim' => $this->request->getVar('nim')])->first()) {
+				$response['validate'] = '';
+				$response['token'] = csrf_hash();
+				echo json_encode($response);
+			} else if ($mahasiswa->where('no_telepon', $this->request->getPost('no_telepon'))->first()) {
+				$response['validate'] = 'no telepon tidak boleh sama';
+				$response['token'] = csrf_hash();
+				echo json_encode($response);
+			} else {
+				$response['validate'] = '';
+				$response['token'] = csrf_hash();
+				echo json_encode($response);
+			}
 		} else {
 			$response['validate'] = '';
 			$response['token'] = csrf_hash();
 			echo json_encode($response);
 		}
-		// if ($mahasiswa->where('no_telepon',$this->request->getPost('no_telepon'))->first()){
-		//     session()->setFlashdata('error','nomer telepon sudah terdaftar');
-		//     return redirect()->withInput()->back();
-		// }
 	}
 
 	function action()
@@ -73,6 +100,8 @@ class WilayahController extends BaseController
 		if ($sklh->where('npsn', $this->request->getVar('npsn'))->first()) {
 			$response['validate'] = '';
 			$response['token'] = csrf_hash();
+			$data = $sklh->where('npsn', $this->request->getVar('npsn'))->first();
+			$response['npsn'] = $data['npsn'];
 			echo json_encode($response);
 		} else {
 			$response['validate'] = 'npsn tidak ditemukan';
