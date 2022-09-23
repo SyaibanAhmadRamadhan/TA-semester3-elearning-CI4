@@ -8,7 +8,7 @@ use App\Models\KecamatanModel;
 use App\Models\MahasiswaModel;
 use App\Models\Sekolah;
 
-class WilayahController extends BaseController
+class AjaxController extends BaseController
 {
 	function valid()
 	{
@@ -64,19 +64,19 @@ class WilayahController extends BaseController
 		}
 	}
 
-	function action()
+	function wilayah()
 	{
-		if ($this->request->getVar('action')) {
-			$action = $this->request->getVar('action');
+		if ($this->request->getVar('wilayah')) {
+			$wilayah = $this->request->getVar('wilayah');
 
-			if ($action == 'get_kabupaten') {
+			if ($wilayah == 'get_kabupaten') {
 				$kabupaten = new KabupatenModel();
 				$kabupatenData['kabupaten'] = $kabupaten->where('provinsi_id', $this->request->getVar('provinsi_id'))->findAll();
 				$kabupatenData['token'] = csrf_hash();
 				return $this->response->setJSON($kabupatenData);
 			}
 
-			if ($action == 'get_kecamatan') {
+			if ($wilayah == 'get_kecamatan') {
 				$kecamatan = new KecamatanModel();
 
 				$kecamatanData['kecamatan'] = $kecamatan->where('kabupaten_id', $this->request->getVar('kabupaten_id'))->findAll();
@@ -84,7 +84,7 @@ class WilayahController extends BaseController
 				echo json_encode($kecamatanData);
 			}
 
-			if ($action == 'get_desa') {
+			if ($wilayah == 'get_desa') {
 				$desa = new DesaModel();
 				$desaData['desa'] = $desa->where('kecamatan_id', $this->request->getVar('kecamatan_id'))->findAll();
 				$desaData['token'] = csrf_hash();

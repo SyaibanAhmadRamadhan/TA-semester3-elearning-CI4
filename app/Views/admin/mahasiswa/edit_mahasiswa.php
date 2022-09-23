@@ -283,16 +283,16 @@
         var provinsi_id = $('#provinsi').val();
 
         if (provinsi_id) {
-            var action = 'get_kabupaten';
+            var wilayah = 'get_kabupaten';
             // CSRF Hash
             var csrfName = $('.txt_csrfname').attr('name'); // CSRF Token name
             var csrfHash = $('.txt_csrfname').val(); // CSRF hash
             $.ajax({
-                url: "<?php echo base_url('/WilayahController/action'); ?>",
+                url: "<?php echo base_url('/AjaxController/wilayah'); ?>",
                 method: "POST",
                 data: {
                     provinsi_id: provinsi_id,
-                    action: action,
+                    wilayah: wilayah,
                     [csrfName]: csrfHash
                 },
                 dataType: "JSON",
@@ -311,16 +311,16 @@
             var kabupaten_id = $('#kab').val();
 
             if (kabupaten_id) {
-                var action = 'get_kecamatan';
+                var wilayah = 'get_kecamatan';
                 // CSRF Hash
                 var csrfName = $('.txt_csrfname').attr('name'); // CSRF Token name
                 var csrfHash = $('.txt_csrfname').val(); // CSRF hash
                 $.ajax({
-                    url: "<?php echo base_url('/WilayahController/action'); ?>",
+                    url: "<?php echo base_url('/AjaxController/wilayah'); ?>",
                     method: "POST",
                     data: {
                         kabupaten_id: kabupaten_id,
-                        action: action,
+                        wilayah: wilayah,
                         [csrfName]: csrfHash
                     },
                     dataType: "JSON",
@@ -339,16 +339,16 @@
 
             var kecamatan_id = $('#kec').val();
             if (kecamatan_id) {
-                var action = 'get_desa';
+                var wilayah = 'get_desa';
                 // CSRF Hash
                 var csrfName = $('.txt_csrfname').attr('name'); // CSRF Token name
                 var csrfHash = $('.txt_csrfname').val(); // CSRF hash
                 $.ajax({
-                    url: "<?php echo base_url('/WilayahController/action'); ?>",
+                    url: "<?php echo base_url('/AjaxController/wilayah'); ?>",
                     method: "POST",
                     data: {
                         kecamatan_id: kecamatan_id,
-                        action: action,
+                        wilayah: wilayah,
                         [csrfName]: csrfHash
                     },
                     dataType: "JSON",
@@ -370,18 +370,18 @@
         $('#provinsi').change(function() {
 
             var provinsi_id = $('#provinsi').val();
-            var action = 'get_kabupaten';
+            var wilayah = 'get_kabupaten';
             // CSRF Hash
             var csrfName = $('.txt_csrfname').attr('name'); // CSRF Token name
             var csrfHash = $('.txt_csrfname').val(); // CSRF hash
 
             if (provinsi_id != '') {
                 $.ajax({
-                    url: "<?php echo base_url('/WilayahController/action'); ?>",
+                    url: "<?php echo base_url('/AjaxController/wilayah'); ?>",
                     method: "POST",
                     data: {
                         provinsi_id: provinsi_id,
-                        action: action,
+                        wilayah: wilayah,
                         [csrfName]: csrfHash
                     },
                     dataType: "JSON",
@@ -405,7 +405,7 @@
         $('#kabupaten').change(function() {
 
             var kabupaten_id = $('#kabupaten').val();
-            var action = 'get_kecamatan';
+            var wilayah = 'get_kecamatan';
             // CSRF Hash
             var csrfName = $('.txt_csrfname').attr('name'); // CSRF Token name
             var csrfHash = $('.txt_csrfname').val(); // CSRF hash
@@ -413,11 +413,11 @@
 
             if (kabupaten_id != '') {
                 $.ajax({
-                    url: "<?php echo base_url('/WilayahController/action'); ?>",
+                    url: "<?php echo base_url('/AjaxController/wilayah'); ?>",
                     method: "POST",
                     data: {
                         kabupaten_id: kabupaten_id,
-                        action: action,
+                        wilayah: wilayah,
                         [csrfName]: csrfHash
                     },
                     dataType: "JSON",
@@ -439,18 +439,18 @@
 
         $("#kecamatan").change(function() {
             var kecamatan_id = $("#kecamatan").val();
-            var action = "get_desa";
+            var wilayah = "get_desa";
             // CSRF Hash
             var csrfName = $('.txt_csrfname').attr('name'); // CSRF Token name
             var csrfHash = $('.txt_csrfname').val(); // CSRF hash
 
             if (kecamatan_id != "") {
                 $.ajax({
-                    url: "<?php echo base_url('/WilayahController/action'); ?>",
+                    url: "<?php echo base_url('/AjaxController/wilayah'); ?>",
                     method: "POST",
                     data: {
                         kecamatan_id: kecamatan_id,
-                        action: action,
+                        wilayah: wilayah,
                         [csrfName]: csrfHash
                     },
                     dataType: "JSON",
@@ -481,7 +481,7 @@
             let nim = document.getElementById('nim').value;
             if (email != '') {
                 $.ajax({
-                    url: "<?php echo base_url('/WilayahController/valid'); ?>",
+                    url: "<?php echo base_url('/AjaxController/valid'); ?>",
                     method: 'post',
                     dataType: "JSON",
                     data: {
@@ -527,7 +527,7 @@
             let nim = document.getElementById('nim').value;
             if (nisn != '') {
                 $.ajax({
-                    url: "<?php echo base_url('/WilayahController/valid'); ?>",
+                    url: "<?php echo base_url('/AjaxController/valid'); ?>",
                     method: 'post',
                     dataType: "JSON",
                     data: {
@@ -577,7 +577,7 @@
             let npsn = $('#npsn').val();
             if (npsn != '') {
                 $.ajax({
-                    url: "<?php echo base_url('/WilayahController/sekolah'); ?>",
+                    url: "<?php echo base_url('/AjaxController/sekolah'); ?>",
                     method: 'post',
                     dataType: "JSON",
                     data: {
@@ -625,7 +625,7 @@
             let nim = document.getElementById('nim').value;
             if (no_telepon != '') {
                 $.ajax({
-                    url: "<?php echo base_url('/WilayahController/valid'); ?>",
+                    url: "<?php echo base_url('/AjaxController/valid'); ?>",
 
                     method: 'post',
                     dataType: "JSON",
