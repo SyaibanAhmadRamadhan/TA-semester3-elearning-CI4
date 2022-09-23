@@ -66,6 +66,8 @@
         <link href="<?= base_url('vendors/nprogress/nprogress.css') ?>" rel="stylesheet">
         <!-- Custom Theme Style -->
         <link href="<?= base_url('build/css/custom.min.css') ?>" rel="stylesheet">
+        <!-- bootstrap-daterangepicker -->
+        <link href="<?= base_url('vendors/bootstrap-daterangepicker/daterangepicker.css') ?>" rel="stylesheet">
     <?php endif; ?>
 </head>
 
@@ -169,6 +171,25 @@
             });
         </script>
     <?php elseif (esc($title) == 'detailMahasiswa') : ?>
+        <!-- jQuery -->
+        <script src="<?= base_url('vendors/jquery/dist/jquery.min.js') ?>"></script>
+        <!-- Bootstrap -->
+        <script src="<?= base_url('vendors/bootstrap/dist/js/bootstrap.min.js') ?>"></script>
+        <!-- FastClick -->
+        <script src="<?= base_url('vendors/fastclick/lib/fastclick.js') ?>"></script>
+        <!-- NProgress -->
+        <script src="<?= base_url('vendors/nprogress/nprogress.js') ?>"></script>
+        <!-- morris.js -->
+        <script src="<?= base_url('vendors/raphael/raphael.min.js') ?>"></script>
+        <script src="<?= base_url('vendors/morris.js/morris.min.js') ?>"></script>
+        <!-- bootstrap-progressbar -->
+        <script src="<?= base_url('vendors/bootstrap-progressbar/bootstrap-progressbar.min.js') ?>"></script>
+        <!-- bootstrap-daterangepicker -->
+        <script src="<?= base_url('vendors/moment/min/moment.min.js') ?>"></script>
+        <script src="<?= base_url('vendors/bootstrap-daterangepicker/daterangepicker.js') ?>"></script>
+
+        <!-- Custom Theme Scripts -->
+        <script src="<?= base_url('build/js/custom.min.js') ?>"></script>
     <?php endif; ?>
 
 
