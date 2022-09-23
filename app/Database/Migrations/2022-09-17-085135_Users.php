@@ -11,55 +11,55 @@ class Users extends Migration
         $this->db->disableForeignKeyChecks();
         $this->forge->addField([
             'id' => [
-                'type'=>'INT',
+                'type' => 'INT',
                 'constraint' => 5,
                 'unsigned'       => true,
-				'auto_increment' => true
+                'auto_increment' => true
             ],
             'id_admin' => [
-                'type'=>'INT',
+                'type' => 'INT',
                 'constraint' => 12,
                 'unsigned'       => true,
-                'null'=>true
+                'null' => true
             ],
-            'nim_dosen' => [
-                'type'=>'VARCHAR',
+            'nip_dosen' => [
+                'type' => 'VARCHAR',
                 'constraint' => 12,
-                'null'=>true
+                'null' => true
             ],
             'nim_mahasiswa' => [
-                'type'=>'VARCHAR',
+                'type' => 'VARCHAR',
                 'constraint' => 12,
-                'null'=>true
+                'null' => true
             ],
-			'role'      => [
-				'type'           => 'ENUM',
-				'constraint'     => ['admin', 'mahasiswa','dosen'],
-				'default'        => 'mahasiswa',
-			],
-			'password'      => [
-				'type'           => 'VARCHAR',
-				'constraint'     => 255,
-			],
-			'created_at' => [
-				'type'           => 'DATETIME',
-				'null'       	 => true,
-			],
-			'updated_at' => [
-				'type'           => 'DATETIME',
-				'null'       	 => true,
-			]
+            'role'      => [
+                'type'           => 'ENUM',
+                'constraint'     => ['admin', 'mahasiswa', 'dosen'],
+                'default'        => 'mahasiswa',
+            ],
+            'password'      => [
+                'type'           => 'VARCHAR',
+                'constraint'     => 255,
+            ],
+            'created_at' => [
+                'type'           => 'DATETIME',
+                'null'            => true,
+            ],
+            'updated_at' => [
+                'type'           => 'DATETIME',
+                'null'            => true,
+            ]
 
         ]);
 
         // Membuat primary key
-		$this->forge->addKey('id', TRUE);
+        $this->forge->addKey('id', TRUE);
 
-        $this->forge->addForeignKey('id_admin','admin','id','CASCADE', 'CASCADE');
-        $this->forge->addForeignKey('nim_dosen','dosen','nim','CASCADE', 'CASCADE');
-        $this->forge->addForeignKey('nim_mahasiswa','mahasiswa','nim','CASCADE', 'CASCADE');
-		// Membuat tabel mahasiswa
-		$this->forge->createTable('user', TRUE);
+        $this->forge->addForeignKey('id_admin', 'admin', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('nip_dosen', 'dosen', 'nip', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('nim_mahasiswa', 'mahasiswa', 'nim', 'CASCADE', 'CASCADE');
+        // Membuat tabel mahasiswa
+        $this->forge->createTable('user', TRUE);
         $this->db->enableForeignKeyChecks();
     }
 

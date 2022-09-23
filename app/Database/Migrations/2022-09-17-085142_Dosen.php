@@ -6,26 +6,57 @@ use CodeIgniter\Database\Migration;
 
 class Dosen extends Migration
 {
-    public function up()
-    {
+	public function up()
+	{
 		$this->db->disableForeignKeyChecks();
-        $this->forge->addField([
-            'nim' => [
-                'type'=>'VARCHAR',
-                'constraint' => 20,
+		$this->forge->addField([
+			'nip' => [
+				'type' => 'VARCHAR',
+				'constraint' => 20,
 				'auto_increment' => true
-            ],
-            'nama'       => [
+			],
+			'kode_dosen' => [
+				'type' => 'VARCHAR',
+				'constraint' => 20,
+			],
+			'name'       => [
 				'type'           => 'VARCHAR',
 				'constraint'     => '255'
 			],
-			'alamat'      => [
+			'email'       => [
 				'type'           => 'VARCHAR',
-				'constraint'     => 100
+				'constraint'     => '255'
+			],
+			'kode_jurusan'       => [
+				'type'           => 'VARCHAR',
+				'constraint'     => '100',
+				'null'			 => true
+			],
+			'asal_universitas'       => [
+				'type'           => 'VARCHAR',
+				'constraint'     => '100',
+				'null'			 => true,
+			],
+			'gelar'       => [
+				'type'           => 'VARCHAR',
+				'constraint'     => '100',
+				'null'			 => true,
+			],
+			'no_telepon'       => [
+				'type'           => 'VARCHAR',
+				'constraint'     => '100'
+			],
+			'gender'       => [
+				'type'           => 'ENUM',
+				'constraint'     => ['pria', 'wanita']
 			],
 			'tgl_lahir' => [
 				'type'           => 'TEXT',
 				'null'           => true,
+			],
+			'picture'       => [
+				'type'           => 'VARCHAR',
+				'constraint'     => '255'
 			],
 			'created_at' => [
 				'type'           => 'DATETIME',
@@ -36,18 +67,19 @@ class Dosen extends Migration
 				'null'       	 => true,
 			]
 
-        ]);
+		]);
 
-        // Membuat primary key
-		$this->forge->addKey('nim', TRUE);
+		// Membuat primary key
+		$this->forge->addKey('nip', TRUE);
 
-		// Membuat tabel mahasiswa
+		// Membuat tabel dosen
+		$this->forge->addForeignKey('kode_jurusan', 'jurusan', 'kode', 'CASCADE', 'CASCADE');
 		$this->forge->createTable('dosen', TRUE);
 		$this->db->enableForeignKeyChecks();
-    }
+	}
 
-    public function down()
-    {
-        $this->forge->dropTable('dosen');
-    }
+	public function down()
+	{
+		$this->forge->dropTable('dosen');
+	}
 }

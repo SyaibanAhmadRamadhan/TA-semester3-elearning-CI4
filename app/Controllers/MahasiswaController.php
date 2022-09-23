@@ -167,7 +167,7 @@ class MahasiswaController extends BaseController
         $adMhs = $mahasiswa->addres($id);
         $detail = $mahasiswa->where('nim', $id)->first();
         $dataSekolah = $sekolah->where('npsn', $adMhs[0]->NPSN)->first();
-        $dataSemester = $semester->where('nim_mahasiswa', $adMhs[0]->nim)->first();
+        $dataSemester = $semester->where(['nim_mahasiswa' => $adMhs[0]->nim, 'keterangan' => 'berlangsung'])->first();
         if (!$detail) {
             throw PageNotFoundException::forPageNotFound();
         }

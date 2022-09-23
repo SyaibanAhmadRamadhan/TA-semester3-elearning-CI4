@@ -35,14 +35,6 @@
                         <div class="x_panel">
                             <div class="x_title">
                                 <h2>Data Mahasiswa<small>*</small></h2>
-                                <ul class="nav navbar-right panel_toolbox">
-                                    <li>
-                                        <form method="post" action="<?= base_url('admin/mahasiswa/update/semester') ?>">
-                                            <?= csrf_field() ?>
-                                            <button type="submit" class="btn btn-sm btn-outline-secondary">UPDATE SEMESTER</button>
-                                        </form>
-                                    </li>
-                                </ul>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
@@ -58,15 +50,15 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach ($mahasiswa as $x) : ?>
+                                        <?php foreach ($dosen as $x) : ?>
                                             <tr>
-                                                <td class="text-center"><?= $x['nim'] ?></td>
+                                                <td class="text-center"><?= $x['nip'] ?></td>
                                                 <td class="text-center"><?= $x['name'] ?></td>
                                                 <td class="text-center"><?= $x['tgl_lahir'] ?></td>
                                                 <td class="text-center">
-                                                    <a href="<?= base_url('admin/mahasiswa/' . $x['nim'] . '/detail') ?>" class="btn btn-sm btn-outline-secondary">Preview</a>
-                                                    <a href="<?= base_url('admin/mahasiswa/' . $x['nim'] . '/edit') ?>" class="btn btn-sm btn-outline-secondary">Edit</a>
-                                                    <a href="#" data-href="<?= base_url('admin/mahasiswa/' . $x['nim'] . '/delete') ?>" onclick="confirmToDelete(this)" class="btn btn-sm btn-outline-danger">Delete</a>
+                                                    <a href="<?= base_url('admin/dosen/' . $x['nip'] . '/detail') ?>" class="btn btn-sm btn-outline-secondary">Preview</a>
+                                                    <a href="<?= base_url('admin/dosen/' . $x['nip'] . '/edit') ?>" class="btn btn-sm btn-outline-secondary">Edit</a>
+                                                    <a href="#" data-href="<?= base_url('admin/dosen/' . $x['nip'] . '/delete') ?>" onclick="confirmToDelete(this)" class="btn btn-sm btn-outline-danger">Delete</a>
                                                 </td>
                                             </tr>
                                         <?php endforeach ?>

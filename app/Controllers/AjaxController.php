@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\DesaModel;
+use App\Models\DosenModel;
 use App\Models\KabupatenModel;
 use App\Models\KecamatanModel;
 use App\Models\MahasiswaModel;
@@ -10,6 +11,45 @@ use App\Models\Sekolah;
 
 class AjaxController extends BaseController
 {
+	function validateDosen()
+	{
+		$dosen = new DosenModel();
+		$dosen1 = new DosenModel();
+
+		if ($dosen->where('email', $this->request->getVar('email'))->first()) {
+			if ($dosen1->where(['email' => $this->request->getVar('email'), 'nip' => $this->request->getVar('nip')])->first()) {
+				$response['validate'] = '';
+				$response['token'] = csrf_hash();
+				echo json_encode($response);
+			} else if ($dosen->where('email', $this->request->getVar('email'))->first()) {
+				$response['validate'] = 'email tidak boleh sama';
+				$response['token'] = csrf_hash();
+				echo json_encode($response);
+			} else {
+				$response['validate'] = '';
+				$response['token'] = csrf_hash();
+				echo json_encode($response);
+			}
+		} else if ($dosen->where('no_telepon', $this->request->getPost('no_telepon'))->first()) {
+			if ($dosen1->where(['no_telepon' => $this->request->getVar('no_telepon'), 'nip' => $this->request->getVar('nip')])->first()) {
+				$response['validate'] = '';
+				$response['token'] = csrf_hash();
+				echo json_encode($response);
+			} else if ($dosen->where('no_telepon', $this->request->getPost('no_telepon'))->first()) {
+				$response['validate'] = 'no telepon tidak boleh sama';
+				$response['token'] = csrf_hash();
+				echo json_encode($response);
+			} else {
+				$response['validate'] = '';
+				$response['token'] = csrf_hash();
+				echo json_encode($response);
+			}
+		} else {
+			$response['validate'] = '';
+			$response['token'] = csrf_hash();
+			echo json_encode($response);
+		}
+	}
 	function valid()
 	{
 		$mahasiswa = new MahasiswaModel();

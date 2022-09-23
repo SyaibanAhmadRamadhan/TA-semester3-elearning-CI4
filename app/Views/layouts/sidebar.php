@@ -34,8 +34,8 @@
                     </li>
                     <li><a><i class="fa fa-desktop"></i> Dosen <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="./layout-blank.html">Add Dosen</a></li>
-                            <li><a href="./layout-one-column.html">Data Dosen</a></li>
+                            <li><a href="<?= base_url('admin/dosen/add') ?>">Add Dosen</a></li>
+                            <li><a href="<?= base_url('admin/dosen') ?>">Data Dosen</a></li>
                         </ul>
                     </li>
                     <li><a><i class="fa fa-table"></i> Mata Kuliah <span class="fa fa-chevron-down"></span></a>
