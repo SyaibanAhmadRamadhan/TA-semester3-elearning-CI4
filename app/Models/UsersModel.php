@@ -11,7 +11,7 @@ class UsersModel extends Model
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $allowedFields    = [
-        'id_admin','nim_mahasiswa','nim_dosen','role','password'
+        'id_admin', 'nim_mahasiswa', 'nip_dosen', 'role', 'password'
     ];
 
     // Dates
@@ -19,16 +19,16 @@ class UsersModel extends Model
 
     public function admin($id)
     {
-         return $this->db->table('user')
-         ->join('admin','user.id_admin=admin.id')
-         ->where('id_admin',$id)
-         ->get()->getResultObject();
+        return $this->db->table('user')
+            ->join('admin', 'user.id_admin=admin.id')
+            ->where('id_admin', $id)
+            ->get()->getResultObject();
     }
     public function mahasiswa($id)
     {
-         return $this->db->table('user')
-         ->join('mahasiswa','user.nim_mahasiswa=mahasiswa.nim')
-         ->where('nim_mahasiswa',$id)
-         ->get()->getResultObject();
+        return $this->db->table('user')
+            ->join('mahasiswa', 'user.nim_mahasiswa=mahasiswa.nim')
+            ->where('nim_mahasiswa', $id)
+            ->get()->getResultObject();
     }
 }

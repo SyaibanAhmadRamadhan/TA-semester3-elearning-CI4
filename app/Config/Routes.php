@@ -41,7 +41,6 @@ $routes->get('/', 'AdminController::index');
 // admin
 $routes->group('admin', ['filter' => 'usersAuth'], function ($routes) {
     $routes->get('/', 'AdminController::index');
-
     // mahasiswa
     $routes->post('mahasiswa/update/semester', 'MahasiswaController::updateSemester');
     $routes->add('mahasiswa/add', 'MahasiswaController::addMahasiswa');
@@ -49,6 +48,13 @@ $routes->group('admin', ['filter' => 'usersAuth'], function ($routes) {
     $routes->get('mahasiswa/(:segment)/detail', 'MahasiswaController::detailMahasiswa/$1');
     $routes->add('mahasiswa/(:segment)/edit', 'MahasiswaController::editMahasiswa/$1');
     $routes->get('mahasiswa/(:segment)/delete', 'MahasiswaController::deleteMahasiswa/$1');
+
+    // dosen
+    $routes->add('dosen/add', 'DosenController::addDosen');
+    $routes->get('dosen', 'DosenController::dataDosen');
+    $routes->get('dosen/(:segment)/detail', 'DosenController::detailDosen/$1');
+    $routes->add('dosen/(:segment)/edit', 'DosenController::editDosen/$1');
+    $routes->get('dosen/(:segment)/delete', 'DosenController::deleteDosen/$1');
 });
 
 /**
