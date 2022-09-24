@@ -140,6 +140,12 @@
                                                             <label class="small mb-1" for="tanggal_lahir">Kode Dosen</label>
                                                             <input class="form-control" id="tanggal_lahir" type="tel" value=" <?= $data->kode_dosen ?> " disabled>
                                                         </div>
+                                                        <?php for ($i = 0; $i < count($gelar); $i++) :  ?>
+                                                            <div class="col-md-6">
+                                                                <label class="small mb-1" for="nisn">gelar <?= $i + 1 ?></label>
+                                                                <input class="form-control" id="nisn" type="text" value="<?= $gelar[$i]['program_studi'] ?> | <?= $gelar[$i]['jengjang'] ?> | <?= $gelar[$i]['gelar'] ?> " disabled>
+                                                            </div>
+                                                        <?php endfor ?>
                                                     </div>
                                                 </form>
                                             </div>

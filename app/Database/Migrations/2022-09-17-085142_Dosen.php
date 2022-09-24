@@ -35,12 +35,6 @@ class Dosen extends Migration
 			'asal_universitas'       => [
 				'type'           => 'VARCHAR',
 				'constraint'     => '100',
-				'null'			 => true,
-			],
-			'gelar'       => [
-				'type'           => 'VARCHAR',
-				'constraint'     => '100',
-				'null'			 => true,
 			],
 			'no_telepon'       => [
 				'type'           => 'VARCHAR',

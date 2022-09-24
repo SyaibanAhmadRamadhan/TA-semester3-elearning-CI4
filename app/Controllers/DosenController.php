@@ -3,14 +3,19 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Database\Migrations\DaftarGelar;
+use App\Database\Migrations\Gelar;
 use App\Models\AddresModel;
+use App\Models\DaftarGelarModel;
 use App\Models\DaftarKelas;
 use App\Models\DosenModel;
+use App\Models\GelarModel;
 use App\Models\JurusanModel;
 use App\Models\Kelas;
 use App\Models\MahasiswaModel;
 use App\Models\ProvinsiModel;
 use App\Models\SemesterModel;
+use App\Models\UniversitasModel;
 use App\Models\UsersModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 
@@ -50,6 +55,7 @@ class DosenController extends BaseController
             $user = new UsersModel();
             $addres = new AddresModel();
             $kelas = new Kelas();
+            $gelar = new GelarModel();
             if ($this->request->getPost('action') == "false") {
                 $datapicture = $this->request->getFile('picture');
                 $fileName = $datapicture->getRandomName();
@@ -64,7 +70,7 @@ class DosenController extends BaseController
                     'picture' => $fileName,
                     'kode_jurusan' => $this->request->getPost('jurusan'),
                     'tahun' => date("Y"),
-                    'nip' => $nip
+                    'nip' => $nip,
                 ]);
                 $datapicture->move('uploads/picture/dosen', $fileName);
             } else if ($this->request->getPost('action') == "true") {
@@ -80,7 +86,7 @@ class DosenController extends BaseController
                         'picture' => 'cowok.jpeg',
                         'kode_jurusan' => $this->request->getPost('jurusan'),
                         'tahun' => date("Y"),
-                        'nip' => $nip
+                        'nip' => $nip,
                     ]);
                 } elseif ($this->request->getPost('gender') == 'wanita') {
                     $dosen->insert([
@@ -94,7 +100,7 @@ class DosenController extends BaseController
                         'picture' => 'cewek.jpeg',
                         'kode_jurusan' => $this->request->getPost('jurusan'),
                         'tahun' => date("Y"),
-                        'nip' => $nip
+                        'nip' => $nip,
                     ]);
                 }
             }
@@ -103,6 +109,13 @@ class DosenController extends BaseController
             foreach ($kelasPost as $x) {
                 $kelas->insert([
                     'id_kelas' => $x,
+                    'nip_dosen' => $nip
+                ]);
+            }
+            $gelarPost = $this->request->getPost('gelar');
+            foreach ($gelarPost as $x) {
+                $gelar->insert([
+                    'id_gelar' => $x,
                     'nip_dosen' => $nip
                 ]);
             }
@@ -124,12 +137,14 @@ class DosenController extends BaseController
         $jurusan = new JurusanModel();
         $prov = new ProvinsiModel();
         $kelas = new DaftarKelas();
+        $daftarGelar = new DaftarGelarModel();
         $dataProv = $prov->findAll();
         return view('admin/dosen/add_dosen', [
             "title" => "addDosen",
             "provinsi" => $dataProv,
             "jurusan" => $jurusan->findAll(),
-            "kelas" => $kelas->findAll()
+            "kelas" => $kelas->findAll(),
+            "gelar" => $daftarGelar->findAll()
         ]);
     }
 
@@ -148,16 +163,20 @@ class DosenController extends BaseController
         $dosen = new DosenModel();
         $kelas = new Kelas();
         $daftarKelas = new DaftarKelas();
+        $dafratGelar = new DaftarGelarModel();
+        $gelar = new GelarModel();
 
         $addresDosen = $dosen->addres($id);
         $dataKelas = $kelas->where('nip_dosen', $addresDosen[0]->nip)->findAll();
+        $dataGelar = $gelar->where('nip_dosen', $addresDosen[0]->nip)->findAll();
         // array
         for ($i = 0; $i < count($dataKelas); $i++) {
             $namaKelas[] = $daftarKelas->where('id', $dataKelas[$i]['id_kelas'])->first();
         }
-        // echo "<pre>";
-        // print_r($namaKelas);
-        // echo "</pre>";
+
+        for ($i = 0; $i < count($dataGelar); $i++) {
+            $namaGelar[] = $dafratGelar->where('id', $dataGelar[$i]['id_gelar'])->first();
+        }
         if (!$addresDosen) {
             throw PageNotFoundException::forPageNotFound();
         }
@@ -167,11 +186,14 @@ class DosenController extends BaseController
             "title" => 'detailDosen',
             "nip" => $id,
             "kelas" => $namaKelas,
+            "gelar" => $namaGelar
         ]);
     }
+
     public function editDosen($id)
     {
     }
+
     public function deleteDosen($id)
     {
         $dosen = new DosenModel();

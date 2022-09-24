@@ -4,14 +4,14 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class DosenModel extends Model
+class GelarModel extends Model
 {
 
-    protected $table            = 'dosen';
-    protected $primaryKey       = 'nip';
+    protected $table            = 'gelar';
+    protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $allowedFields    = [
-        'name', 'tgl_lahir', 'email', 'kode_dosen', 'gender', 'wali', 'picture', 'no_telepon', 'kode_jurusan', 'nip', 'kelas', 'semester', 'asal_universitas'
+        'id_gelar', 'nip_dosen'
     ];
     protected $useTimestamps = true;
 

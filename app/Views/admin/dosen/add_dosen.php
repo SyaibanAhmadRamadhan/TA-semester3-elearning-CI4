@@ -86,6 +86,20 @@
                                         </div>
                                     </div>
                                     <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gelar">Gelar <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <select class="form-control filter_wilayah" id="gelar" name="gelar[]" required="required" type="select" multiple>
+                                                <option value="">Select gelar</option>
+                                                <?php
+                                                foreach ($gelar as $x) {
+                                                    echo '<option value="' . $x['id'] . '">' . $x['gelar'] . '</option>';
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="item form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jurusan">Jurusan <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
