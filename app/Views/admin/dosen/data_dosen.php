@@ -43,7 +43,7 @@
                                 <table id="datatable-buttons" class="table table-striped table-bordered">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">Nim</th>
+                                            <th class="text-center">Nip</th>
                                             <th class="text-center">Name</th>
                                             <th class="text-center">Tgl_lahir</th>
                                             <th class="text-center">Action</th>

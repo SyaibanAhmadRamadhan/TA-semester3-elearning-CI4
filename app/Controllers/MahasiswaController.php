@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Database\Migrations\Semester;
 use App\Models\AddresModel;
+use App\Models\DaftarKelas;
 use App\Models\JurusanModel;
 use App\Models\MahasiswaModel;
 use App\Models\ProvinsiModel;
@@ -83,7 +84,7 @@ class MahasiswaController extends BaseController
                     'no_telepon' => $this->request->getPost('no_telepon'),
                     'picture' => $fileName,
                     'kode_jurusan' => $this->request->getPost('jurusan'),
-                    'kelas' => $this->request->getPost('kelas'),
+                    'id_kelas' => $this->request->getPost('kelas'),
                     'tahun' => date("Y"),
                     'nim' => $nim
                 ]);
@@ -99,7 +100,7 @@ class MahasiswaController extends BaseController
                         'gender' => $this->request->getPost('gender'),
                         'wali' => $this->request->getPost('wali'),
                         'no_telepon' => $this->request->getPost('no_telepon'),
-                        'kelas' => $this->request->getPost('kelas'),
+                        'id_kelas' => $this->request->getPost('kelas'),
                         'picture' => "cowok.jpeg",
                         'kode_jurusan' => $this->request->getPost('jurusan'),
                         'tahun' => date("Y"),
@@ -111,7 +112,7 @@ class MahasiswaController extends BaseController
                         'tgl_lahir' => $this->request->getPost('tgl_lahir'),
                         'email' => $this->request->getPost('email'),
                         'NISN' => $this->request->getPost('nisn'),
-                        'kelas' => $this->request->getPost('kelas'),
+                        'id_kelas' => $this->request->getPost('kelas'),
                         'NPSN' => $this->request->getPost('npsn'),
                         'gender' => $this->request->getPost('gender'),
                         'wali' => $this->request->getPost('wali'),
@@ -150,10 +151,12 @@ class MahasiswaController extends BaseController
         $jurusan = new JurusanModel();
         $prov = new ProvinsiModel();
         $dataProv = $prov->findAll();
+        $kelas = new DaftarKelas();
         return view('admin/mahasiswa/add_mahasiswa', [
             "title" => "addMahasiswa",
             "provinsi" => $dataProv,
             "jurusan" => $jurusan->findAll(),
+            "kelas" => $kelas->findAll()
         ]);
     }
 
@@ -232,8 +235,7 @@ class MahasiswaController extends BaseController
                     'no_telepon' => $this->request->getPost('no_telepon'),
                     'picture' => $fileName,
                     'kode_jurusan' => $this->request->getPost('jurusan'),
-                    'kelas' => $this->request->getPost('kelas'),
-
+                    'id_kelas' => $this->request->getPost('kelas'),
                     'tahun' => date("Y"),
                     'nim' => $nim
                 ]);
@@ -259,8 +261,7 @@ class MahasiswaController extends BaseController
                         'gender' => $this->request->getPost('gender'),
                         'wali' => $this->request->getPost('wali'),
                         'no_telepon' => $this->request->getPost('no_telepon'),
-                        'kelas' => $this->request->getPost('kelas'),
-
+                        'id_kelas' => $this->request->getPost('kelas'),
                         'picture' => $this->request->getPost('oldPic'),
                         'kode_jurusan' => $this->request->getPost('jurusan'),
                         'tahun' => date("Y"),
@@ -276,8 +277,7 @@ class MahasiswaController extends BaseController
                             'NPSN' => $this->request->getPost('npsn'),
                             'gender' => $this->request->getPost('gender'),
                             'wali' => $this->request->getPost('wali'),
-                            'kelas' => $this->request->getPost('kelas'),
-
+                            'id_kelas' => $this->request->getPost('kelas'),
                             'no_telepon' => $this->request->getPost('no_telepon'),
                             'picture' => "cowok.jpeg",
                             'kode_jurusan' => $this->request->getPost('jurusan'),
@@ -294,8 +294,7 @@ class MahasiswaController extends BaseController
                             'gender' => $this->request->getPost('gender'),
                             'wali' => $this->request->getPost('wali'),
                             'no_telepon' => $this->request->getPost('no_telepon'),
-                            'kelas' => $this->request->getPost('kelas'),
-
+                            'id_kelas' => $this->request->getPost('kelas'),
                             'picture' => "cewek.jpeg",
                             'kode_jurusan' => $this->request->getPost('jurusan'),
                             'tahun' => date("Y"),
@@ -330,6 +329,7 @@ class MahasiswaController extends BaseController
         }
 
         $prov = new ProvinsiModel();
+        $kelas = new DaftarKelas();
         $dataProv = $prov->findAll();
         $adMhs = $mahasiswa->addres($id);
         $jurusan = new JurusanModel();
@@ -338,6 +338,7 @@ class MahasiswaController extends BaseController
             "data" => $adMhs[0],
             "provinsi" => $dataProv,
             "jurusan" => $jurusan->findAll(),
+            "kelas" => $kelas->findAll()
         ]);
     }
 

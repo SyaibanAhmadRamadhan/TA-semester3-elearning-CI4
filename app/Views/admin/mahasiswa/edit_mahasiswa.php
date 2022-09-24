@@ -121,8 +121,11 @@
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                             <select class="form-control filter_wilayah" id="kelas" name="kelas" required>
                                                 <option value="">Select Kelas</option>
-                                                <option value="19.2B.01" <?= $data->kelas == '19.2B.01' ? 'selected' : '' ?>>19.2B.01</option>
-                                                <option value="19.4B.01" <?= $data->kelas == '19.4B.01' ? 'selected' : '' ?>>19.2B.01</option>
+                                                <?php
+                                                foreach ($kelas as $x) {
+                                                    echo '<option value="' . $x['id'] . '"', $data->name_kelas == $x['name_kelas'] ? 'selected' : '', '>' . $x['name_kelas'] . '</option>';
+                                                }
+                                                ?>
                                             </select>
                                         </div>
                                     </div>

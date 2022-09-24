@@ -13,7 +13,7 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2>User Report</h2>
+                                <h2>Data Mahasiswa</h2>
                                 <ul class="nav navbar-right panel_toolbox">
                                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                     </li>
@@ -163,7 +163,7 @@
                                                         <!-- Form Group (phone number)-->
                                                         <div class="col-md-6">
                                                             <label class="small mb-1" for="tanggal_lahir">Kelas</label>
-                                                            <input class="form-control" id="tanggal_lahir" type="tel" value="<?= $data->kelas ?>" disabled>
+                                                            <input class="form-control" id="tanggal_lahir" type="tel" value="<?= $data->name_kelas ?>" disabled>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <label class="small mb-1" for="tanggal_lahir">Semester</label>

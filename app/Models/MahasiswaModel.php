@@ -11,7 +11,7 @@ class MahasiswaModel extends Model
     protected $primaryKey       = 'nim';
     protected $useAutoIncrement = true;
     protected $allowedFields    = [
-        'name', 'alamat', 'tgl_lahir', 'email', 'NISN', 'NPSN', 'gender', 'wali', 'picture', 'no_telepon', 'tahun', 'kode_jurusan', 'nim', 'kelas', 'semester'
+        'name', 'alamat', 'tgl_lahir', 'email', 'NISN', 'NPSN', 'gender', 'wali', 'picture', 'no_telepon', 'tahun', 'kode_jurusan', 'nim', 'id_kelas', 'semester'
     ];
     protected $useTimestamps = true;
 
@@ -23,6 +23,7 @@ class MahasiswaModel extends Model
             ->join('wilayah_kabupaten', 'addres.id_kabupaten=wilayah_kabupaten.id')
             ->join('wilayah_kecamatan', 'addres.id_kecamatan=wilayah_kecamatan.id')
             ->join('wilayah_desa', 'addres.id_desa=wilayah_desa.id')
+            ->join('daftar_kelas', 'mahasiswa.id_kelas=daftar_kelas.id')
             ->join('jurusan', 'mahasiswa.kode_jurusan=jurusan.kode')
             ->where('nim_mahasiswa', $id)
             ->get()->getResultObject();

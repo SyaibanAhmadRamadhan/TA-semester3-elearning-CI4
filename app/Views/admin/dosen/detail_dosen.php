@@ -13,11 +13,11 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2>User Report</h2>
+                                <h2>Data Dosen</h2>
                                 <ul class="nav navbar-right panel_toolbox">
                                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                     </li>
-                                    <li><a class="close-link" href="<?= base_url('admin/mahasiswa') ?>"><i class="fa fa-close"></i></a>
+                                    <li><a class="close-link" href="<?= base_url('admin/dosen') ?>"><i class="fa fa-close"></i></a>
                                     </li>
                                 </ul>
                                 <div class="clearfix"></div>
@@ -52,7 +52,7 @@
                                                     <div class="row gx-3 mb-3">
                                                         <?php for ($i = 0; $i < count($kelas); $i++) :  ?>
                                                             <div class="col-md-6">
-                                                                <label class="small mb-1" for="nisn">Kelas <?= $i + 1 ?></label>
+                                                                <label class="small mb-1" for="nisn">Kelas <?= $i + 1 ?> | <?= $kelas[$i]['semester'] ?></label>
                                                                 <input class="form-control" id="nisn" type="text" value="<?= $kelas[$i]['name_kelas'] ?>" disabled>
                                                             </div>
                                                         <?php endfor ?>
