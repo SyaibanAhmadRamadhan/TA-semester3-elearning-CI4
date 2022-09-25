@@ -45,9 +45,11 @@ class Mahasiswa extends Migration
 				'type'           => 'VARCHAR',
 				'constraint'     => '100'
 			],
-			'kelas'       => [
-				'type'           => 'VARCHAR',
-				'constraint'     => '100'
+			'id_kelas'       => [
+				'type'           => 'INT',
+				'constraint'     => '11',
+				'unsigned'       => true,
+				'null' => true
 			],
 			'gender'       => [
 				'type'           => 'ENUM',
@@ -81,6 +83,7 @@ class Mahasiswa extends Migration
 
 		// Membuat tabel mahasiswa
 		$this->forge->addForeignKey('kode_jurusan', 'jurusan', 'kode', 'CASCADE', 'CASCADE');
+		$this->forge->addForeignKey('id_kelas', 'daftar_kelas', 'id', 'CASCADE', 'CASCADE');
 		$this->forge->createTable('mahasiswa', TRUE);
 		$this->db->enableForeignKeyChecks();
 	}
