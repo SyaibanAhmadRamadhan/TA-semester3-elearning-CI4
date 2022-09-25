@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Database\Migrations\Semester;
 use App\Models\AddresModel;
-use App\Models\DaftarKelas;
+use App\Models\DaftarKelasModel;
 use App\Models\JurusanModel;
 use App\Models\MahasiswaModel;
 use App\Models\ProvinsiModel;
@@ -151,7 +151,7 @@ class MahasiswaController extends BaseController
         $jurusan = new JurusanModel();
         $prov = new ProvinsiModel();
         $dataProv = $prov->findAll();
-        $kelas = new DaftarKelas();
+        $kelas = new DaftarKelasModel();
         return view('admin/mahasiswa/add_mahasiswa', [
             "title" => "addMahasiswa",
             "provinsi" => $dataProv,

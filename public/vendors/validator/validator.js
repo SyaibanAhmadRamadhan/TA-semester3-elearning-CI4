@@ -44,6 +44,7 @@ var validator = (function ($) {
     hid_repeat: 'email sudah terdatar',
     hid1_repeat: 'nisn sudah terdaftar',
     hid2_repeat: 'no telepon sudah terdaftar',
+    kodeValidate_repeat: 'kode sudah terdaftar',
     repeat: 'no match',
     complete: 'input is not complete',
     select: 'Please select an option',
