@@ -38,10 +38,11 @@
                                 <form class="form-horizontal form-label-left" action="" method="post" novalidate>
                                     <?= csrf_field() ?>
                                     <div class="item form-group">
+                                        <input type="hidden" name="nameValidate" id="nameValidate">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name Jurusan <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <input id="name" class="form-control col-md-7 col-xs-12" id="name" name="name" placeholder="masukan nama jurusan..." required="required" type="text">
+                                            <input id="name" class="form-control col-md-7 col-xs-12" id="name" name="name" placeholder="masukan nama jurusan..." required="required" type="text" data-validate-linked="nameValidate">
                                         </div>
                                     </div>
                                     <div class="item form-group">
@@ -81,7 +82,7 @@
 </div>
 
 <script>
-    $(document).ready(function(){
+    $(document).ready(function() {
         $('#kode').keyup(function() {
             var csrfName = $('.txt_csrfname').attr('name'); // CSRF Token name
             var csrfHash = $('.txt_csrfname').val(); // CSRF hash
@@ -93,15 +94,40 @@
                     dataType: "JSON",
                     data: {
                         kode: kode,
-                        id:'',
+                        id: '',
                         [csrfName]: csrfHash
                     },
                     success: function(data) {
                         console.log('rama');
                         let kodeHid = document.getElementById('kodeValidate').value = data.validate;
-                        if (kodeHid) {
-                        } else {
+                        if (kodeHid) {} else {
                             let hid = document.getElementById('kodeValidate').value = document.getElementById('kode').value
+                            document.getElementById('btnSubmit').disabled = false;
+                        }
+                        $('.txt_csrfname').val(data.token);
+                    }
+                });
+            }
+        })
+        $('#name').keyup(function() {
+            var csrfName = $('.txt_csrfname').attr('name'); // CSRF Token name
+            var csrfHash = $('.txt_csrfname').val(); // CSRF hash
+            let name = $('#name').val();
+            if (name != '') {
+                $.ajax({
+                    url: "<?php echo base_url('/AjaxController/validateJurusan'); ?>",
+                    method: 'post',
+                    dataType: "JSON",
+                    data: {
+                        name: name,
+                        id: '',
+                        [csrfName]: csrfHash
+                    },
+                    success: function(data) {
+                        console.log('rama');
+                        let nameHid = document.getElementById('nameValidate').value = data.validate;
+                        if (nameHid) {} else {
+                            let hid = document.getElementById('nameValidate').value = document.getElementById('name').value
                             document.getElementById('btnSubmit').disabled = false;
                         }
                         $('.txt_csrfname').val(data.token);

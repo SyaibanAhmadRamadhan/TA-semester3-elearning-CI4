@@ -13,7 +13,8 @@ use App\Models\Sekolah;
 class AjaxController extends BaseController
 {
 
-	function validateJurusan(){
+	function validateJurusan()
+	{
 		$jurusan = new JurusanModel();
 		$jurusan1 = new JurusanModel();
 
@@ -31,13 +32,27 @@ class AjaxController extends BaseController
 				$response['token'] = csrf_hash();
 				echo json_encode($response);
 			}
+		} else if ($jurusan->where('name_jurusan', $this->request->getVar('name'))->first()) {
+			if ($jurusan1->where(['name_jurusan' => $this->request->getVar('name'), 'created_at' => $this->request->getVar('created_at')])->first()) {
+				$response['validate'] = '';
+				$response['token'] = csrf_hash();
+				echo json_encode($response);
+			} else if ($jurusan->where('name_jurusan', $this->request->getVar('name'))->first()) {
+				$response['validate'] = 'name sudah terdaftar';
+				$response['token'] = csrf_hash();
+				echo json_encode($response);
+			} else {
+				$response['validate'] = '';
+				$response['token'] = csrf_hash();
+				echo json_encode($response);
+			}
 		} else {
 			$response['validate'] = '';
 			$response['token'] = csrf_hash();
 			echo json_encode($response);
 		}
 	}
-	
+
 	function validateDosen()
 	{
 		$dosen = new DosenModel();

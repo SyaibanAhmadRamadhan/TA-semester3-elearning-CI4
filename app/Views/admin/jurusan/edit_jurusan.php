@@ -38,10 +38,11 @@
                                 <form class="form-horizontal form-label-left" action="" method="post" novalidate>
                                     <?= csrf_field() ?>
                                     <div class="item form-group">
+                                        <input type="hidden" name="nameValidate" id="nameValidate" value="<?= $data['name_jurusan'] ?>">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name Jurusan <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <input id="name" class="form-control col-md-7 col-xs-12" value="<?= $data['name_jurusan'] ?>" name="name" placeholder="masukan nama jurusan..." required="required" type="text">
+                                            <input id="name" class="form-control col-md-7 col-xs-12" value="<?= $data['name_jurusan'] ?>" name="name" placeholder="masukan nama jurusan..." required="required" type="text" data-validate-linked="nameValidate">
                                         </div>
                                     </div>
                                     <div class="item form-group">
@@ -49,7 +50,7 @@
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="kode">Kode Jurusan <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <input id="kode" class="form-control col-md-7 col-xs-12"  data-validate-linked="kodeValidate" value="<?= $data['kode'] ?>" name="kode" placeholder="masukan kode jurusan..." required="required" type="text">
+                                            <input id="kode" class="form-control col-md-7 col-xs-12" data-validate-linked="kodeValidate" value="<?= $data['kode'] ?>" name="kode" placeholder="masukan kode jurusan..." required="required" type="text">
                                         </div>
                                     </div>
                                     <div class="ln_solid"></div>
@@ -82,7 +83,7 @@
 </div>
 
 <script>
-    $(document).ready(function(){
+    $(document).ready(function() {
         $('#kode').keyup(function() {
             var csrfName = $('.txt_csrfname').attr('name'); // CSRF Token name
             var csrfHash = $('.txt_csrfname').val(); // CSRF hash
@@ -95,16 +96,45 @@
                     dataType: "JSON",
                     data: {
                         kode: kode,
-                        created_at:created_at,
+                        created_at: created_at,
                         [csrfName]: csrfHash
                     },
                     success: function(data) {
                         console.log('rama');
                         let kodeHid = document.getElementById('kodeValidate').value = data.validate;
                         if (kodeHid) {
-                            
+
                         } else {
                             let hid = document.getElementById('kodeValidate').value = document.getElementById('kode').value
+                            document.getElementById('btnSubmit').disabled = false;
+                        }
+                        $('.txt_csrfname').val(data.token);
+                    }
+                });
+            }
+        })
+        $('#name').keyup(function() {
+            var csrfName = $('.txt_csrfname').attr('name'); // CSRF Token name
+            var csrfHash = $('.txt_csrfname').val(); // CSRF hash
+            let name = $('#name').val();
+            let created_at = document.getElementById('created_at').value;
+            if (name != '') {
+                $.ajax({
+                    url: "<?php echo base_url('/AjaxController/validateJurusan'); ?>",
+                    method: 'post',
+                    dataType: "JSON",
+                    data: {
+                        name: name,
+                        created_at: created_at,
+                        [csrfName]: csrfHash
+                    },
+                    success: function(data) {
+                        console.log('rama');
+                        let nameHid = document.getElementById('nameValidate').value = data.validate;
+                        if (nameHid) {
+
+                        } else {
+                            let hid = document.getElementById('nameValidate').value = document.getElementById('name').value
                             document.getElementById('btnSubmit').disabled = false;
                         }
                         $('.txt_csrfname').val(data.token);

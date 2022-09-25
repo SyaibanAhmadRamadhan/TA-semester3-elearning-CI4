@@ -45,6 +45,7 @@ var validator = (function ($) {
     hid1_repeat: 'nisn sudah terdaftar',
     hid2_repeat: 'no telepon sudah terdaftar',
     kodeValidate_repeat: 'kode sudah terdaftar',
+    nameValidate_repeat: 'name jurusan sudah terdaftar',
     repeat: 'no match',
     complete: 'input is not complete',
     select: 'Please select an option',
