@@ -41,15 +41,15 @@
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name Jurusan <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <input id="name" class="form-control col-md-7 col-xs-12" id="name" name="name" placeholder="masukan nama jurusan..." required="required" type="text">
+                                            <input id="name" class="form-control col-md-7 col-xs-12" value="<?= $data['name_jurusan'] ?>" name="name" placeholder="masukan nama jurusan..." required="required" type="text">
                                         </div>
                                     </div>
                                     <div class="item form-group">
-                                        <input type="hidden" name="kodeValidate" id="kodeValidate">
+                                        <input type="hidden" name="kodeValidate" id="kodeValidate" value="<?= $data['kode'] ?>">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="kode">Kode Jurusan <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <input id="kode" class="form-control col-md-7 col-xs-12" data-validate-linked="kodeValidate" name="kode" placeholder="masukan kode jurusan..." required="required" type="text">
+                                            <input id="kode" class="form-control col-md-7 col-xs-12"  data-validate-linked="kodeValidate" value="<?= $data['kode'] ?>" name="kode" placeholder="masukan kode jurusan..." required="required" type="text">
                                         </div>
                                     </div>
                                     <div class="ln_solid"></div>
@@ -60,6 +60,7 @@
                                         </div>
                                     </div>
                                     <input type="hidden" class="txt_csrfname" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
+                                    <input type="hidden" id="created_at" value="<?= $data['created_at'] ?>">
                                 </form>
                             </div>
                         </div>
@@ -86,6 +87,7 @@
             var csrfName = $('.txt_csrfname').attr('name'); // CSRF Token name
             var csrfHash = $('.txt_csrfname').val(); // CSRF hash
             let kode = $('#kode').val();
+            let created_at = document.getElementById('created_at').value;
             if (kode != '') {
                 $.ajax({
                     url: "<?php echo base_url('/AjaxController/validateJurusan'); ?>",
@@ -93,13 +95,14 @@
                     dataType: "JSON",
                     data: {
                         kode: kode,
-                        id:'',
+                        created_at:created_at,
                         [csrfName]: csrfHash
                     },
                     success: function(data) {
                         console.log('rama');
                         let kodeHid = document.getElementById('kodeValidate').value = data.validate;
                         if (kodeHid) {
+                            
                         } else {
                             let hid = document.getElementById('kodeValidate').value = document.getElementById('kode').value
                             document.getElementById('btnSubmit').disabled = false;

@@ -363,12 +363,6 @@
     });
 </script>
 
-<script>
-    $(document).ready(function() {
-
-    })
-</script>
-
 
 <script>
     $(document).ready(function() {

@@ -29,7 +29,7 @@
 
         <!-- Custom Theme Style -->
         <link href="<?= base_url('build/css/custom.min.css') ?>" rel="stylesheet">
-    <?php elseif (esc($title) == 'dataMahasiswa' || esc($title) == 'dataDosen') : ?>
+    <?php elseif (esc($title) == 'dataMahasiswa' || esc($title) == 'dataDosen' || esc($title) == 'dataJurusan') : ?>
         <!-- Bootstrap -->
         <link href="<?= base_url('vendors/bootstrap/dist/css/bootstrap.min.css') ?>" rel="stylesheet">
         <!-- Font Awesome -->
@@ -70,6 +70,17 @@
         <link href="<?= base_url('vendors/bootstrap-daterangepicker/daterangepicker.css') ?>" rel="stylesheet">
 
     <?php elseif (esc($title) == 'addDosen' || esc($title) == 'editDosen') : ?>
+        <!-- Bootstrap -->
+        <link href="<?= base_url('vendors/bootstrap/dist/css/bootstrap.min.css') ?>" rel="stylesheet">
+        <!-- Font Awesome -->
+        <link href="<?= base_url('vendors/font-awesome/css/font-awesome.min.css') ?>" rel="stylesheet">
+        <!-- NProgress -->
+        <link href="<?= base_url('vendors/nprogress/nprogress.css') ?>" rel="stylesheet">
+        <!-- Custom Theme Style -->
+        <link href="<?= base_url('build/css/custom.min.css') ?>" rel="stylesheet">
+        <script src="<?= base_url('js/jquery-3.3.1.min.js') ?>"></script>
+        <link href='https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css' rel="stylesheet" />
+    <?php elseif (esc($title) == 'addJurusan' || esc($title) == 'editJurusan') : ?>
         <!-- Bootstrap -->
         <link href="<?= base_url('vendors/bootstrap/dist/css/bootstrap.min.css') ?>" rel="stylesheet">
         <!-- Font Awesome -->
@@ -129,7 +140,7 @@
         <!-- Custom Theme Scripts -->
         <script src="<?= base_url('build/js/custom.min.js') ?>"></script>
 
-    <?php elseif (esc($title) == 'dataMahasiswa' || esc($title) == 'dataDosen') : ?>
+    <?php elseif (esc($title) == 'dataMahasiswa' || esc($title) == 'dataDosen'  || esc($title) == 'dataJurusan') : ?>
         <!-- jQuery -->
         <script src="<?= base_url('vendors/jquery/dist/jquery.min.js') ?>"></script>
         <!-- Bootstrap -->
@@ -204,6 +215,27 @@
         <script src="<?= base_url('build/js/custom.min.js') ?>"></script>
 
     <?php elseif (esc($title) == 'addDosen' || esc($title) == 'editDosen') : ?>
+        <!-- jQuery -->
+        <script src="<?= base_url('vendors/jquery/dist/jquery.min.js') ?>"></script>
+        <!-- Bootstrap -->
+        <script src="<?= base_url('vendors/bootstrap/dist/js/bootstrap.min.js') ?>"></script>
+        <!-- FastClick -->
+        <script src="<?= base_url('vendors/fastclick/lib/fastclick.js') ?>"></script>
+        <!-- NProgress -->
+        <script src="<?= base_url('vendors/nprogress/nprogress.js') ?>"></script>
+        <!-- validator -->
+        <script src="<?= base_url('vendors/validator/validator.js') ?>"></script>
+
+        <!-- Custom Theme Scripts -->
+        <script src="<?= base_url('build/js/custom.min.js') ?>"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+        <script type="text/javascript">
+            $('.filter_wilayah').select2({
+                theme: "classic"
+            });
+        </script>
+    <?php elseif (esc($title) == 'addJurusan' || esc($title) == 'editJurusan') : ?>
         <!-- jQuery -->
         <script src="<?= base_url('vendors/jquery/dist/jquery.min.js') ?>"></script>
         <!-- Bootstrap -->

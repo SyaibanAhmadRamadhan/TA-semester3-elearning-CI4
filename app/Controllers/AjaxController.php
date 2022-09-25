@@ -7,10 +7,37 @@ use App\Models\DosenModel;
 use App\Models\KabupatenModel;
 use App\Models\KecamatanModel;
 use App\Models\MahasiswaModel;
+use App\Models\JurusanModel;
 use App\Models\Sekolah;
 
 class AjaxController extends BaseController
 {
+
+	function validateJurusan(){
+		$jurusan = new JurusanModel();
+		$jurusan1 = new JurusanModel();
+
+		if ($jurusan->where('kode', $this->request->getVar('kode'))->first()) {
+			if ($jurusan1->where(['kode' => $this->request->getVar('kode'), 'created_at' => $this->request->getVar('created_at')])->first()) {
+				$response['validate'] = '';
+				$response['token'] = csrf_hash();
+				echo json_encode($response);
+			} else if ($jurusan->where('kode', $this->request->getVar('kode'))->first()) {
+				$response['validate'] = 'kode sudah terdaftar';
+				$response['token'] = csrf_hash();
+				echo json_encode($response);
+			} else {
+				$response['validate'] = '';
+				$response['token'] = csrf_hash();
+				echo json_encode($response);
+			}
+		} else {
+			$response['validate'] = '';
+			$response['token'] = csrf_hash();
+			echo json_encode($response);
+		}
+	}
+	
 	function validateDosen()
 	{
 		$dosen = new DosenModel();

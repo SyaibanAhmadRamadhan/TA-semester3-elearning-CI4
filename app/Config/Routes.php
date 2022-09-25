@@ -58,6 +58,9 @@ $routes->group('admin', ['filter' => 'usersAuth'], function ($routes) {
 
     // jurusan
     $routes->add('jurusan/add','JurusanController::addJurusan');
+    $routes->get('jurusan', 'JurusanController::dataJurusan');
+    $routes->get('jurusan/(:segment)/delete', 'JurusanController::deleteJurusan/$1');
+    $routes->add('jurusan/(:segment)/edit', 'JurusanController::editJurusan/$1');
 });
 
 /**
