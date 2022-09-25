@@ -14,7 +14,7 @@
     <link href="<?= base_url('vendors/bootstrap/dist/css/bootstrap.min.css') ?>" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="<?= base_url('vendors/font-awesome/css/font-awesome.min.css') ?>" rel="stylesheet">
-    <!-- NProgress -- >
+    <!-- NProgress -->
     <link href="<?= base_url('vendors/nprogress/nprogress.css') ?>" rel="stylesheet">
     <!-- Animate.css -->
     <link href="<?= base_url('vendors/animate.css/animate.min.css') ?>" rel="stylesheet">

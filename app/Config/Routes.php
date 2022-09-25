@@ -55,6 +55,9 @@ $routes->group('admin', ['filter' => 'usersAuth'], function ($routes) {
     $routes->get('dosen/(:segment)/detail', 'DosenController::detailDosen/$1');
     $routes->add('dosen/(:segment)/edit', 'DosenController::editDosen/$1');
     $routes->get('dosen/(:segment)/delete', 'DosenController::deleteDosen/$1');
+
+    // jurusan
+    $routes->add('jurusan/add','JurusanController::addJurusan');
 });
 
 /**
