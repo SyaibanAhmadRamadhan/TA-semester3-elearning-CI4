@@ -27,12 +27,12 @@
                                     <div class="profile_img">
                                         <div id="crop-avatar">
                                             <!-- Current avatar -->
-                                            <img class="img-responsive avatar-view" src="<?= base_url("uploads/picture/mahasiswa/" . $data->picture) ?>" alt="Avatar" title="Change the avatar">
+                                            <img class="img-responsive avatar-view" src="<?= base_url("uploads/picture/dosen/" . $data->picture) ?>" alt="Avatar" title="Change the avatar">
                                         </div>
                                     </div>
                                     <h3><?= $data->name ?></h3>
                                     <br />
-                                    <a class="btn btn-success" href="<?= base_url('admin/mahasiswa/' . $nip . '/edit') ?>"><i class="fa fa-edit m-right-xs"></i>Edit Profile</a>
+                                    <a class="btn btn-success" href="<?= base_url('admin/dosen/' . $nip . '/edit') ?>"><i class="fa fa-edit m-right-xs"></i>Edit Profile</a>
                                     <br />
                                 </div>
                                 <div class="col-md-9 col-sm-9 col-xs-12">

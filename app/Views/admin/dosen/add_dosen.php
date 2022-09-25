@@ -93,7 +93,7 @@
                                                 <option value="">Select gelar</option>
                                                 <?php
                                                 foreach ($gelar as $x) {
-                                                    echo '<option value="' . $x['id'] . '">' . $x['gelar'] . '</option>';
+                                                    echo '<option value="' . $x['id'] . '">' . $x['program_studi'] . ' ' . $x['jengjang'] . ' || ' . $x['gelar'] . '</option>';
                                                 }
                                                 ?>
                                             </select>

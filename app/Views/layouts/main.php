@@ -223,9 +223,6 @@
             $('.filter_wilayah').select2({
                 theme: "classic"
             });
-            $("select").on("select2:close", function(e) {
-                $(this).valid();
-            });
         </script>
     <?php endif; ?>
 

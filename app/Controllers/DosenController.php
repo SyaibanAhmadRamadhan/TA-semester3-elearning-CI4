@@ -3,19 +3,14 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Database\Migrations\DaftarGelar;
-use App\Database\Migrations\Gelar;
 use App\Models\AddresModel;
 use App\Models\DaftarGelarModel;
-use App\Models\DaftarKelas;
+use App\Models\DaftarKelasModel;
 use App\Models\DosenModel;
 use App\Models\GelarModel;
 use App\Models\JurusanModel;
-use App\Models\Kelas;
-use App\Models\MahasiswaModel;
+use App\Models\KelasModel;
 use App\Models\ProvinsiModel;
-use App\Models\SemesterModel;
-use App\Models\UniversitasModel;
 use App\Models\UsersModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 
@@ -54,7 +49,7 @@ class DosenController extends BaseController
 
             $user = new UsersModel();
             $addres = new AddresModel();
-            $kelas = new Kelas();
+            $kelas = new KelasModel();
             $gelar = new GelarModel();
             if ($this->request->getPost('action') == "false") {
                 $datapicture = $this->request->getFile('picture');
@@ -136,7 +131,7 @@ class DosenController extends BaseController
         }
         $jurusan = new JurusanModel();
         $prov = new ProvinsiModel();
-        $kelas = new DaftarKelas();
+        $kelas = new DaftarKelasModel();
         $daftarGelar = new DaftarGelarModel();
         $dataProv = $prov->findAll();
         return view('admin/dosen/add_dosen', [
@@ -161,8 +156,8 @@ class DosenController extends BaseController
     public function detailDosen($id)
     {
         $dosen = new DosenModel();
-        $kelas = new Kelas();
-        $daftarKelas = new DaftarKelas();
+        $kelas = new KelasModel();
+        $daftarKelas = new DaftarKelasModel();
         $dafratGelar = new DaftarGelarModel();
         $gelar = new GelarModel();
 
@@ -192,6 +187,37 @@ class DosenController extends BaseController
 
     public function editDosen($id)
     {
+        $jurusan = new JurusanModel();
+        $prov = new ProvinsiModel();
+        $daftarkelas = new DaftarKelasModel();
+        $kelas = new KelasModel();
+        $dosen = new DosenModel();
+        $daftarGelar = new DaftarGelarModel();
+        $gelar = new GelarModel();
+
+        $dataDosen = $dosen->addres($id);
+        $dataGelar = $gelar->where('nip_dosen', $dataDosen[0]->nip_dosen)->findAll();
+        $dataKelas = $kelas->where('nip_dosen', $dataDosen[0]->nip_dosen)->findAll();
+
+        for ($i = 0; $i < count($dataGelar); $i++) {
+            $dataDaftarGelar[] = $daftarGelar->where('id', $dataGelar[$i]['id_gelar'])->findAll();
+        }
+
+        for ($i = 0; $i < count($dataKelas); $i++) {
+            $dataDaftarKelas[] = $daftarkelas->where('id', $dataKelas[$i]['id_kelas'])->findAll();
+        }
+
+        $dataProv = $prov->findAll();
+        return view('admin/dosen/edit_dosen', [
+            "title" => "editDosen",
+            "provinsi" => $dataProv,
+            "jurusan" => $jurusan->findAll(),
+            "kelas" => $daftarkelas->findAll(),
+            "gelar" => $daftarGelar->findAll(),
+            "data" => $dataDosen[0],
+            "dataDaftarGelar" => $dataDaftarGelar,
+            "dataDaftarKelas" => $dataDaftarKelas
+        ]);
     }
 
     public function deleteDosen($id)
