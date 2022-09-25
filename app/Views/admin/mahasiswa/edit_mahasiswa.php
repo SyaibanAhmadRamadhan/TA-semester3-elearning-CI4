@@ -88,9 +88,9 @@
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                             <label class="radio-inline mr-3">
-                                                <input type="radio" value="pria" id="a1" name="gender" onclick="previewImage()" value="<?= $data->gender ?>" <?= $data->gender == 'pria' ? 'checked' : '' ?>> Pria</label>
+                                                <input type="radio" value="pria" id="a1" name="gender" onclick="previewImage()" <?= $data->gender == 'pria' ? 'checked' : '' ?>> Pria</label>
                                             <label class="radio-inline mr-3">
-                                                <input type="radio" value="wanita" id="a2" name="gender" onclick="previewImage()" value="<?= $data->gender ?> " <?= $data->gender == 'wanita' ? 'checked' : '' ?>> Wanita</label>
+                                                <input type="radio" value="wanita" id="a2" name="gender" onclick="previewImage()" <?= $data->gender == 'wanita' ? 'checked' : '' ?>> Wanita</label>
                                         </div>
                                     </div>
                                     <input type="hidden" name="hid2" id="hid2" value="<?= $data->no_telepon ?>">
@@ -272,7 +272,33 @@
                     imageShow.src = oFREvent.target.result;
                 }
             }
+            $("input:radio[name=gender]").change(function() {
+                let action = document.querySelector('#action')
+                action.value = "true"
+                var value = $(this).val();
+                var image_name;
+                console.log(value)
+                if (value == 'pria') {
+                    image_name = "<?= base_url('uploads/picture/mahasiswa/cowok.jpeg') ?>";
+                } else if (value == 'wanita') {
+                    image_name = "<?= base_url('uploads/picture/mahasiswa/cewek.jpeg') ?>";
+                }
+                $('#foto').attr('src', image_name);
+            });
         } else {
+            $("input:radio[name=gender]").change(function() {
+                let action = document.querySelector('#action')
+                action.value = "true"
+                var value = $(this).val();
+                var image_name;
+                console.log(value)
+                if (value == 'pria') {
+                    image_name = "<?= base_url('uploads/picture/mahasiswa/cowok.jpeg') ?>";
+                } else if (value == 'wanita') {
+                    image_name = "<?= base_url('uploads/picture/mahasiswa/cewek.jpeg') ?>";
+                }
+                $('#foto').attr('src', image_name);
+            });
             document.getElementById('picture').disabled = false;
             imageShow.src = `<?= base_url('uploads/picture/mahasiswa') ?>/${oldPic}`;
         }
