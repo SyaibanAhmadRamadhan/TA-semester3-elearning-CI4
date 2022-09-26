@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class DaftarKelas extends Migration
+class Ruang extends Migration
 {
     public function up()
     {
@@ -15,11 +15,11 @@ class DaftarKelas extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true
             ],
-            'name_kelas' => [
+            'no_ruang' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
-            'semester' => [
+            'lantai' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
@@ -38,11 +38,11 @@ class DaftarKelas extends Migration
         $this->forge->addKey('id', TRUE);
 
         // Membuat tabel mahasiswa
-        $this->forge->createTable('daftar_kelas', TRUE);
+        $this->forge->createTable('ruang', TRUE);
     }
 
     public function down()
     {
-        $this->forge->dropTable('daftar_kelas');
+        $this->forge->dropTable('ruang');
     }
 }

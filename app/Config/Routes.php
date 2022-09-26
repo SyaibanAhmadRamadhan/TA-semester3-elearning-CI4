@@ -57,10 +57,17 @@ $routes->group('admin', ['filter' => 'usersAuth'], function ($routes) {
     $routes->get('dosen/(:segment)/delete', 'DosenController::deleteDosen/$1');
 
     // jurusan
-    $routes->add('jurusan/add','JurusanController::addJurusan');
+    $routes->add('jurusan/add', 'JurusanController::addJurusan');
     $routes->get('jurusan', 'JurusanController::dataJurusan');
     $routes->get('jurusan/(:segment)/delete', 'JurusanController::deleteJurusan/$1');
     $routes->add('jurusan/(:segment)/edit', 'JurusanController::editJurusan/$1');
+
+    // matakuliah
+    $routes->post('matakuliah/update/semester', 'MatakuliahController::updateMatakuliah');
+    $routes->add('matakuliah/add', 'MatakuliahController::addMatakuliah');
+    $routes->get('matakuliah', 'MatakuliahController::dataMatakuliah');
+    $routes->add('matakuliah/(:segment)/edit', 'MatakuliahController::editMatakuliah/$1');
+    $routes->get('matakuliah/(:segment)/delete', 'MatakuliahController::deleteMatakuliah/$1');
 });
 
 /**

@@ -2,17 +2,126 @@
 
 namespace App\Controllers;
 
+use App\Database\Migrations\DaftarKelas;
+use App\Models\DaftarKelasModel;
 use App\Models\DesaModel;
 use App\Models\DosenModel;
 use App\Models\KabupatenModel;
 use App\Models\KecamatanModel;
 use App\Models\MahasiswaModel;
 use App\Models\JurusanModel;
+use App\Models\KelasModel;
+use App\Models\MatakuliahModel;
 use App\Models\Sekolah;
+use DateTime;
+
+use function PHPSTORM_META\type;
 
 class AjaxController extends BaseController
 {
 
+	function matakuliah()
+	{
+		$kelas = new KelasModel();
+		$dosen = new DosenModel();
+		$daftarKelas = new DaftarKelasModel();
+		if ($this->request->getVar('action') == 'get_kelas') {
+			$datadaftarKelas = $daftarKelas->where('semester', $this->request->getVar('semester_id'))->findAll();
+			if ($daftarKelas->where('semester', $this->request->getVar('semester_id'))->findAll()) {
+				$response['data1'] = $datadaftarKelas;
+				$response['token'] = csrf_hash();
+				echo json_encode($response);
+			} else {
+				$response['data1'] = '';
+				$response['token'] = csrf_hash();
+				echo json_encode($response);
+			}
+		} else {
+			$datakelas = $kelas->where('id_kelas', $this->request->getPost('kelas_id'))->findAll();
+			if ($kelas->where('id_kelas', $this->request->getPost('kelas_id'))->findAll() && $dosen->where('kode_jurusan', $this->request->getVar('jurusan_id'))->findAll()) {
+				for ($i = 0; $i < count($datakelas); $i++) {
+					$data = $dosen->where(['nip' => $datakelas[$i]['nip_dosen'], 'kode_jurusan' => $this->request->getVar('jurusan_id')])->findAll();
+					if ($data) {
+						$data2[] = $data;
+						$response['data1'] = $data2;
+					} else {
+						$response['dataa1'] = '';
+					}
+				}
+				$response['token'] = csrf_hash();
+				echo json_encode($response);
+			} else {
+				$response['token'] = csrf_hash();
+				echo json_encode($response);
+			}
+		}
+	}
+
+	function validateMatakuliah()
+	{
+		$matkul = new MatakuliahModel();
+		if ($this->request->getVar('action') == 'name') {
+			if ($matkul->where('name_matkul', $this->request->getVar('name'))->first()) {
+				$response['data1'] = 'nama matkul sudah tersedia';
+				$response['token'] = csrf_hash();
+				echo json_encode($response);
+			} else {
+				$response['data1'] = '';
+				$response['token'] = csrf_hash();
+				echo json_encode($response);
+			}
+		}
+
+		if ($this->request->getVar('action') == 'no_ruang') {
+			if ($matkul->where('no_ruang', $this->request->getVar('no_ruang_val'))->findAll()) {
+				$data = $matkul->where('no_ruang', $this->request->getVar('no_ruang_val'))->findAll();
+				if ($this->request->getVar('masuk_val') != '' || $this->request->getVar('keluar_val') != '' || $this->request->getVar('hari_val') != '') {
+					$dataMasuk = $matkul->where(['no_ruang' => $this->request->getVar('no_ruang_val')])->findAll();
+					for ($i = 0; $i < count($dataMasuk); $i++) {
+						if ($this->request->getVar('hari_val') == $dataMasuk[$i]['hari']) {
+							$masuk_val = explode(':', $this->request->getVar('masuk_val'));
+							$keluar_val = explode(':', $this->request->getVar('keluar_val'));
+							$masuk_val_db = explode(':', $dataMasuk[$i]['masuk']);
+							$keluar_val_db = explode(':', $dataMasuk[$i]['selesai']);
+							if (
+								$this->request->getVar('masuk_val') >= $dataMasuk[$i]['masuk'] &&
+								$this->request->getVar('keluar_val') <= $dataMasuk[$i]['selesai']
+							) {
+								$response['data1'] = 'block if';
+							} else {
+								$masuk_val_im = implode($masuk_val);
+								$keluar_val_im = implode($keluar_val);
+								$masuk_val_db_im = implode($masuk_val_db);
+								$keluar_val_db_im = implode($keluar_val_db);
+								for ($masuk_val_im; $masuk_val_im < $keluar_val_im; $masuk_val_im++) {
+									if ($masuk_val_im == $masuk_val_db_im) {
+										$response['data1'] = 'block loop';
+										break;
+									} else if ($masuk_val_im == $keluar_val_db_im) {
+										$response['data1'] = 'block loop else if';
+										break;
+									} else {
+										$response['data1'] = '';
+									}
+								}
+							}
+						} else {
+							$response['data1'] = '';
+						}
+					}
+				} else {
+					$response['data1'] = '';
+				}
+				// $response['data1'] = $matkul->where('no_ruang', $this->request->getVar('no_ruang_val'))->findAll();
+				$response['token'] = csrf_hash();
+				echo json_encode($response);
+			} else {
+				$response['data1'] = '';
+				$response['token'] = csrf_hash();
+				echo json_encode($response);
+			}
+		}
+	}
 	function validateJurusan()
 	{
 		$jurusan = new JurusanModel();

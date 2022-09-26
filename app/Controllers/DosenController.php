@@ -38,7 +38,6 @@ class DosenController extends BaseController
 
             $nip = $tahunnip . $totalDosennip;
 
-            $data = "syaiban ahmad ramadhan";
             $name = explode(" ", $this->request->getPost('name'));
             $kode = "";
 
