@@ -3,12 +3,17 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Database\Migrations\MataKuliah;
 use App\Database\Migrations\Semester;
 use App\Models\AddresModel;
 use App\Models\DaftarKelasModel;
+use App\Models\DosenModel;
 use App\Models\JurusanModel;
 use App\Models\MahasiswaModel;
+use App\Models\MatakuliahMahasiswaModel;
+use App\Models\MatakuliahModel;
 use App\Models\ProvinsiModel;
+use App\Models\RuangModel;
 use App\Models\Sekolah;
 use App\Models\SemesterModel;
 use App\Models\UsersModel;
@@ -131,6 +136,18 @@ class MahasiswaController extends BaseController
                 'role' => 'mahasiswa',
             ]);
 
+
+            $matkul = new MatakuliahModel();
+            $dataMatkul = $matkul->where(['kode_jurusan' => $this->request->getPost('jurusan'), 'id_daftar_kelas' => $this->request->getPost('kelas'), 'semester' => 'semester1'])->findAll();
+
+            $matkulMahasiswa = new MatakuliahMahasiswaModel();
+            for ($i = 0; $i < count($dataMatkul); $i++) {
+                $matkulMahasiswa->insert([
+                    'nim_mahasiswa' => $nim,
+                    'kode_matkul' => $dataMatkul[$i]['kode_matkul']
+                ]);
+            }
+
             $semester->insert([
                 'nim_mahasiswa' => $nim,
                 'keterangan' => 'berlangsung',
@@ -160,9 +177,9 @@ class MahasiswaController extends BaseController
         ]);
     }
 
-
     public function detailMahasiswa($id)
     {
+        $db = db_connect();
         $mahasiswa = new MahasiswaModel();
         $sekolah = new Sekolah();
         $semester = new SemesterModel();
@@ -171,6 +188,22 @@ class MahasiswaController extends BaseController
         $detail = $mahasiswa->where('nim', $id)->first();
         $dataSekolah = $sekolah->where('npsn', $adMhs[0]->NPSN)->first();
         $dataSemester = $semester->where(['nim_mahasiswa' => $adMhs[0]->nim, 'keterangan' => 'berlangsung'])->first();
+
+        $matkulMahasiswa = new MatakuliahMahasiswaModel();
+        $data = $matkulMahasiswa->where('nim_mahasiswa', $id)->findAll();
+
+        $matkul = new MatakuliahModel();
+        foreach ($data as $x) {
+            $dataMatkul[] = $matkul->where('kode_matkul', $x['kode_matkul'])->findAll();
+        }
+
+        $ruang = new RuangModel();
+        $dosen = new DosenModel();
+        foreach ($dataMatkul as $x) {
+            $dataRuang[] = $ruang->where('id', $x[0]['no_ruang'])->findAll();
+            $dataDosen[] = $dosen->where('nip', $x[0]['nip_dosen'])->findAll();
+        }
+
         if (!$detail) {
             throw PageNotFoundException::forPageNotFound();
         }
@@ -180,7 +213,11 @@ class MahasiswaController extends BaseController
             "title" => 'detailMahasiswa',
             "nim" => $id,
             "dataSekolah" => $dataSekolah,
-            "semester" => $dataSemester
+            "semester" => $dataSemester,
+            "matkul" => $dataMatkul,
+            "ruangan" => $dataRuang,
+            "fields" => $db->getFieldNames('mata_kuliah'),
+            "dosen" => $dataDosen
         ]);
     }
 

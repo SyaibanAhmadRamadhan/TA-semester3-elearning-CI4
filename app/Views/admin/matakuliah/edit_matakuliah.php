@@ -235,7 +235,7 @@
                         } else {
                             var html = '<option value="">Select Dosen</option>';
                             for (var count = 0; count < kelas.length; count++) {
-                                html += `<option value='${kelas[count][0]['nip']}' ${kelas[count][0]['nip'] == nip_dosen ? 'selected':''}>${kelas[count][0]['nip']}</option>`;
+                                html += `<option value='${kelas[count][0]['nip']}' ${kelas[count][0]['nip'] == nip_dosen ? 'selected':''}>${kelas[count][0]['name']}</option>`;
 
                             }
                         }
@@ -297,7 +297,7 @@
                         } else {
                             var html = '<option value="">Select Dosen</option>';
                             for (var count = 0; count < kelas.length; count++) {
-                                html += `<option value=${kelas[count][0]['nip']}>${kelas[count][0]['nip']}</option>`;
+                                html += `<option value=${kelas[count][0]['nip']}>${kelas[count][0]['name']}</option>`;
 
                             }
                         }

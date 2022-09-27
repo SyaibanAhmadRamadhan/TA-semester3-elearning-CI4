@@ -45,6 +45,8 @@
                                             </li>
                                             <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Alamat</a>
                                             </li>
+                                            <li role="presentation" class=""><a href="#tab_content4" role="tab" id="profile-tab3" data-toggle="tab" aria-expanded="false">Matkul</a>
+                                            </li>
                                         </ul>
                                         <div id="myTabContent" class="tab-content">
                                             <div role="tabpanel" class="tab-pane fade" id="tab_content1" aria-labelledby="home-tab">
@@ -169,6 +171,41 @@
                                                             <label class="small mb-1" for="tanggal_lahir">Semester</label>
                                                             <input class="form-control" id="tanggal_lahir" type="tel" value="<?= $semester['semester'] ?>" disabled>
                                                         </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane fade" id="tab_content4" aria-labelledby="profile-tab3">
+                                                <form action="">
+                                                    <div class="row gx-3 mb-3">
+                                                        <ul class="messages">
+                                                            <?php $no = 1;
+                                                            for ($i = 0; $i < count($matkul); $i++) : ?>
+                                                                <li>
+                                                                    <div class="message_date">
+                                                                        <p class="month"><?= $matkul[$i][0]['masuk'] ?></p>
+                                                                        <p class="month">-</p>
+                                                                        <p class="month"><?= $matkul[$i][0]['selesai'] ?></p>
+                                                                    </div>
+                                                                    <div class="message_wrapper">
+                                                                        <h4 class="heading">Matkul <?= $no ?></h4>
+                                                                        <blockquote class="message">Kode Matkul, <?= $matkul[$i][0]['kode_matkul'] ?></blockquote>
+                                                                        <blockquote class="message">Name Matkul, <?= $matkul[$i][0]['name_matkul'] ?></blockquote>
+                                                                        <blockquote class="message">Semester, <?= $matkul[$i][0]['semester'] ?></blockquote>
+                                                                        <blockquote class="message">SKS, <?= $matkul[$i][0]['sks'] ?></blockquote>
+                                                                        <blockquote class="message">Nomer Ruangan, <?= $ruangan[$i][0]['no_ruang'] ?></blockquote>
+                                                                        <blockquote class="message">Lantai Ruangan, <?= $ruangan[$i][0]['lantai'] ?></blockquote>
+                                                                        <blockquote class="message">Hari, <?= $matkul[$i][0]['hari'] ?></blockquote>
+                                                                        <blockquote class="message">Masuk Matakuliah, <?= $matkul[$i][0]['masuk'] ?></blockquote>
+                                                                        <blockquote class="message">Keluar Matakuliah, <?= $matkul[$i][0]['selesai'] ?></blockquote>
+                                                                        <blockquote class="message">Jurusan, <?= $data->name_jurusan ?></blockquote>
+                                                                        <blockquote class="message">Name Dosen, <?= $dosen[$i][0]['name'] ?></blockquote>
+                                                                        <blockquote class="message">Kode Dosen, <?= $dosen[$i][0]['kode_dosen'] ?></blockquote>
+                                                                        <br />
+                                                                    </div>
+                                                                </li>
+                                                            <?php $no++;
+                                                            endfor ?>
+                                                        </ul>
                                                     </div>
                                                 </form>
                                             </div>
