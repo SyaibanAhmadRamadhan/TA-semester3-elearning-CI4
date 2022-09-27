@@ -105,14 +105,17 @@
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                             <select class="form-control filter_wilayah" id="semester" name="semester" required="required" type="select">
                                                 <option value="">Select semester</option>
-                                                <option value="semester1">semester1</option>
-                                                <option value="semester2">semester2</option>
-                                                <option value="semester3">semester3</option>
-                                                <option value="semester4">semester4</option>
-                                                <option value="semester5">semester5</option>
-                                                <option value="semester6">semester6</option>
-                                                <option value="semester7">semester7</option>
-                                                <option value="semester8">semester8</option>
+                                                <?php if (date("M") < 6) : ?>
+                                                    <option value="semester2">semester2</option>
+                                                    <option value="semester4">semester4</option>
+                                                    <option value="semester6">semester6</option>
+                                                    <option value="semester6">semester8</option>
+                                                <?php else : ?>
+                                                    <option value="semester1">semester1</option>
+                                                    <option value="semester3">semester3</option>
+                                                    <option value="semester5">semester5</option>
+                                                    <option value="semester7">semester7</option>
+                                                <?php endif ?>
                                             </select>
                                         </div>
                                     </div>
@@ -135,7 +138,7 @@
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                             <select class="form-control filter_wilayah" id="kelas" name="kelas" required>
-                                                <option value="">Select Kelas</option>
+                                                <option value="">Select Jurusan dan Semester terlebih dahulu</option>
                                             </select>
                                         </div>
                                     </div>
@@ -144,7 +147,7 @@
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                             <select class="form-control filter_wilayah" id="dosen" name="dosen" required>
-                                                <option value="">Select Dosen</option>
+                                                <option value="">Select Jurusan, Semester, kelas terlebih dahulu</option>
                                             </select>
                                         </div>
                                     </div>

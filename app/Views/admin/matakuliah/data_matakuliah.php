@@ -34,15 +34,7 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2>Data Mahasiswa<small>*</small></h2>
-                                <ul class="nav navbar-right panel_toolbox">
-                                    <li>
-                                        <form method="post" action="<?= base_url('admin/mahasiswa/update/semester') ?>">
-                                            <?= csrf_field() ?>
-                                            <button type="submit" class="btn btn-sm btn-outline-secondary">UPDATE SEMESTER</button>
-                                        </form>
-                                    </li>
-                                </ul>
+                                <h2>Data Matakuliah<small>*</small></h2>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="x_content">

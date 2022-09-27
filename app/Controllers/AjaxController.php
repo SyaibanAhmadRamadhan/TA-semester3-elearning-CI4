@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Database\Migrations\DaftarKelas;
 use App\Models\DaftarKelasModel;
 use App\Models\DesaModel;
 use App\Models\DosenModel;
@@ -13,9 +12,6 @@ use App\Models\JurusanModel;
 use App\Models\KelasModel;
 use App\Models\MatakuliahModel;
 use App\Models\Sekolah;
-use DateTime;
-
-use function PHPSTORM_META\type;
 
 class AjaxController extends BaseController
 {
@@ -122,6 +118,88 @@ class AjaxController extends BaseController
 			}
 		}
 	}
+
+	function validateMatakuliahEdit()
+	{
+		$matkul = new MatakuliahModel();
+		if ($this->request->getVar('action') == 'name') {
+			if ($matkul->where('name_matkul', $this->request->getVar('name'))->first()) {
+				if ($matkul->where(['name_matkul' => $this->request->getVar('name'), 'kode_matkul' => $this->request->getVar('kode_matkul')])->first()) {
+					$response['data1'] = '';
+					$response['token'] = csrf_hash();
+					echo json_encode($response);
+				} else {
+					$response['data1'] = 'nama matkul sudah tersedia';
+					$response['token'] = csrf_hash();
+					echo json_encode($response);
+				}
+			} else {
+				$response['data1'] = '';
+				$response['token'] = csrf_hash();
+				echo json_encode($response);
+			}
+		}
+
+		if ($this->request->getVar('action') == 'no_ruang') {
+			if ($matkul->where('no_ruang', $this->request->getVar('no_ruang_val'))->findAll()) {
+				$data = $matkul->where('no_ruang', $this->request->getVar('no_ruang_val'))->findAll();
+				if ($this->request->getVar('masuk_val') != '' || $this->request->getVar('keluar_val') != '' || $this->request->getVar('hari_val') != '') {
+					$dataMasuk = $matkul->where('no_ruang', $this->request->getVar('no_ruang_val'))->where('kode_matkul !=', $this->request->getVar('kode_matkul'))->findAll();
+					for ($i = 0; $i < count($dataMasuk); $i++) {
+						if ($this->request->getVar('hari_val') == $dataMasuk[$i]['hari']) {
+
+							$masuk_val = explode(':', $this->request->getVar('masuk_val'));
+							$masuk_value_db = explode(':', $this->request->getVar('masuk_value'));
+							$keluar_value_db = explode(':', $this->request->getVar('keluar_value'));
+							$keluar_val = explode(':', $this->request->getVar('keluar_val'));
+							$masuk_val_db = explode(':', $dataMasuk[$i]['masuk']);
+							$keluar_val_db = explode(':', $dataMasuk[$i]['selesai']);
+
+							$masuk_val_im = implode($masuk_val);
+							$masuk_value_db_im = implode($masuk_value_db);
+							$keluar_value_db_im = implode($keluar_value_db);
+							$keluar_val_im = implode($keluar_val);
+							$masuk_val_db_im = implode($masuk_val_db);
+							$keluar_val_db_im = implode($keluar_val_db);
+							for ($masuk_val_im; $masuk_val_im < $keluar_val_im; $masuk_val_im++) {
+								if ($masuk_val_im == $masuk_val_db_im) {
+									$response['data1'] = 'stop';
+									break;
+								} else if ($masuk_val_im == $keluar_val_db_im) {
+									$response['data1'] = 'stop';
+									break;
+								} elseif ($masuk_val_im == $masuk_value_db_im) {
+									$response['data1'] = '';
+									break;
+								} elseif ($masuk_val_im == $keluar_value_db_im) {
+									$response['data1'] = '';
+									break;
+								} else {
+									$response['data1'] = '';
+								}
+							}
+							if ($matkul->where('kode_matkul', $this->request->getVar('kode_matkul'))->first()) {
+								$matkulNow = $matkul->where('kode_matkul', $this->request->getVar('kode_matkul'))->first();
+								$masukval_now = explode(':', $matkulNow['masuk']);
+								$selesaival_now = explode(':', $matkulNow['selesai']);
+							}
+						} else {
+							$response['data1'] = '';
+						}
+					}
+				} else {
+					$response['data1'] = '';
+				}
+				$response['token'] = csrf_hash();
+				echo json_encode($response);
+			} else {
+				$response['data1'] = '';
+				$response['token'] = csrf_hash();
+				echo json_encode($response);
+			}
+		}
+	}
+
 	function validateJurusan()
 	{
 		$jurusan = new JurusanModel();

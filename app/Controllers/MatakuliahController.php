@@ -76,6 +76,44 @@ class MatakuliahController extends BaseController
     }
     public function editMatakuliah($id)
     {
+        $isValidate = $this->validate([
+            'name' => 'required',
+        ]);
+        if ($isValidate) {
+            $name = explode(" ", $this->request->getPost('name'));
+            $kode = "";
+
+            foreach ($name as $x) {
+                $kode .= $x[0];
+            }
+            $kode_matkul = strtoupper($kode);
+
+            $matkul = new MatakuliahModel();
+            $matkul->update($id, [
+                'kode_matkul' => $kode_matkul,
+                'name_matkul' => $this->request->getPost('name'),
+                'semester' => $this->request->getPost('semester'),
+                'sks' => $this->request->getPost('sks'),
+                'no_ruang' => $this->request->getPost('no_ruang'),
+                'hari' => $this->request->getPost('hari'),
+                'masuk' => $this->request->getPost('masuk'),
+                'selesai' => $this->request->getPost('keluar'),
+                'kode_jurusan' => $this->request->getPost('jurusan'),
+                'nip_dosen' => $this->request->getPost('dosen'),
+                'id_daftar_kelas' => $this->request->getPost('kelas'),
+            ]);
+            return redirect('admin/matakuliah');
+        }
+        $jurusan = new JurusanModel();
+        $matkul = new MatakuliahModel();
+        $dataMatkul = $matkul->where('kode_matkul', $id)->first();
+        $ruang = new RuangModel();
+        return view('admin/matakuliah/edit_matakuliah', [
+            'title' => 'addMatakuliah',
+            'jurusan' => $jurusan->findAll(),
+            'ruang' => $ruang->findAll(),
+            'dataMatkul' => $dataMatkul
+        ]);
     }
 
     public function deleteMatakuliah($id)

@@ -329,7 +329,7 @@ class MahasiswaController extends BaseController
         }
 
         $prov = new ProvinsiModel();
-        $kelas = new DaftarKelas();
+        $kelas = new DaftarKelasModel();
         $dataProv = $prov->findAll();
         $adMhs = $mahasiswa->addres($id);
         $jurusan = new JurusanModel();
