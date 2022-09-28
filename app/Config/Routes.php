@@ -80,8 +80,8 @@ $routes->group('dosen',  ['filter' => 'dosenAuth'], function ($routes) {
 // mahasiswa
 $routes->group('mahasiswa',  ['filter' => 'mahasiswaAuth'], function ($routes) {
     $routes->get('/', 'MahasiswaDashboardController::index');
-    $routes->get('jadwalDosen', 'MahasiswaDashboardController::jadwalDosen');
-    $routes->add('jadwalDosen/(:segment)/kelas', 'MahasiswaDashboardController::ruangKelas/$1');
+    $routes->get('jadwalMahasiswa', 'MahasiswaDashboardController::jadwalMahasiswa');
+    $routes->add('jadwalMahasiswa/(:segment)/kelas', 'MahasiswaDashboardController::ruangKelas/$1');
 });
 /**
  * --------------------------------------------------------------------
