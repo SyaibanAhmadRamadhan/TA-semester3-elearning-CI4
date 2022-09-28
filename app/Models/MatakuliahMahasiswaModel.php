@@ -11,7 +11,7 @@ class MatakuliahMahasiswaModel extends Model
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $allowedFields    = [
-        'nim_mahasiswa', 'kode_matkul'
+        'nim_mahasiswa', 'kode_matkul', 'keterangan'
     ];
     protected $useTimestamps = true;
 }

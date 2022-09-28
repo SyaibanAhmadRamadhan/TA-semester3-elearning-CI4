@@ -25,6 +25,10 @@ class MataKuliahMahasiswa extends Migration
                 'constraint' => 20,
                 'null' => true
             ],
+            'keterangan' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+            ],
             'created_at' => [
                 'type'           => 'DATETIME',
                 'null'            => true,

@@ -3,8 +3,6 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Database\Migrations\MataKuliah;
-use App\Database\Migrations\Semester;
 use App\Models\AddresModel;
 use App\Models\DaftarKelasModel;
 use App\Models\DosenModel;
@@ -144,7 +142,8 @@ class MahasiswaController extends BaseController
             for ($i = 0; $i < count($dataMatkul); $i++) {
                 $matkulMahasiswa->insert([
                     'nim_mahasiswa' => $nim,
-                    'kode_matkul' => $dataMatkul[$i]['kode_matkul']
+                    'kode_matkul' => $dataMatkul[$i]['kode_matkul'],
+                    'keterangan' => 'berlangsung'
                 ]);
             }
 
@@ -179,7 +178,6 @@ class MahasiswaController extends BaseController
 
     public function detailMahasiswa($id)
     {
-        $db = db_connect();
         $mahasiswa = new MahasiswaModel();
         $sekolah = new Sekolah();
         $semester = new SemesterModel();
@@ -190,7 +188,7 @@ class MahasiswaController extends BaseController
         $dataSemester = $semester->where(['nim_mahasiswa' => $adMhs[0]->nim, 'keterangan' => 'berlangsung'])->first();
 
         $matkulMahasiswa = new MatakuliahMahasiswaModel();
-        $data = $matkulMahasiswa->where('nim_mahasiswa', $id)->findAll();
+        $data = $matkulMahasiswa->where(['nim_mahasiswa' => $id, 'keterangan' => 'berlangsung'])->findAll();
 
         $matkul = new MatakuliahModel();
         foreach ($data as $x) {
@@ -216,7 +214,6 @@ class MahasiswaController extends BaseController
             "semester" => $dataSemester,
             "matkul" => $dataMatkul,
             "ruangan" => $dataRuang,
-            "fields" => $db->getFieldNames('mata_kuliah'),
             "dosen" => $dataDosen
         ]);
     }
@@ -403,12 +400,12 @@ class MahasiswaController extends BaseController
         $semester = new SemesterModel();
         $data = $semester->select('nim_mahasiswa')->distinct()->where('keterangan', 'berlangsung')->findAll();
         $dataUI = $semester->where('keterangan', 'berlangsung')->findAll();
+        $matkulMahasiswa = new MatakuliahMahasiswaModel();
         if (date("m") < 06) {
             for ($i = 0; $i < count($data); $i++) {
                 $semesterData = $dataUI[$i]['semester'];
                 $sub = (int)substr($semesterData, 8) + 1;
                 $insert = ("semester" . $sub);
-
                 $semester->update($dataUI[$i]['id'], [
                     "keterangan" => "lulus"
                 ]);
@@ -439,6 +436,44 @@ class MahasiswaController extends BaseController
                 } else {
                 }
             }
+        }
+        $updateMatkul = $matkulMahasiswa->where(['keterangan' => 'berlangsung'])->findAll();
+        $mahasiswa = new MahasiswaModel();
+        $dataMhs = $mahasiswa->findAll();
+        $matkul = new MatakuliahModel();
+        $jurusan =  new JurusanModel();
+        $daftarKelas = new DaftarKelasModel();
+        $matkul = new MatakuliahModel();
+        $matkulMhsInsert = new MatakuliahMahasiswaModel();
+        for ($i = 0; $i < count($updateMatkul); $i++) {
+            $id = $updateMatkul[$i]['id'];
+            $matkulMahasiswa->where('nim_mahasiswa', $updateMatkul[$i]['nim_mahasiswa'])->update($id, [
+                'keterangan' => 'selesai'
+            ]);
+        }
+        $i = 0;
+        foreach ($dataMhs as $x) {
+            $dataJurusan[] = $jurusan->where('kode', $x['kode_jurusan'])->findAll();
+            $dataDaftarKelas[] = $daftarKelas->where('id', $x['id_kelas'])->findAll();
+            $Datasemester = $semester->where(['nim_mahasiswa' => $x['nim'], 'keterangan' => 'berlangsung'])->findAll();
+            // die;
+            $dataMatkulMhs2 = $matkul->where(['kode_jurusan' => $x['kode_jurusan'], 'id_daftar_kelas' => $x['id_kelas'], 'semester' => $Datasemester[0]['semester']])->findAll();
+            if (count($dataMatkulMhs2) > $i) {
+                for ($j = 0; $j < count($dataMatkulMhs2); $j++) {
+                    $matkulMhsInsert->insert([
+                        'kode_matkul' => $dataMatkulMhs2[$j]['kode_matkul'],
+                        'nim_mahasiswa' => $x['nim'],
+                        'keterangan' => 'berlangsung'
+                    ]);
+                }
+            } else {
+                $matkulMhsInsert->insert([
+                    'kode_matkul' => $dataMatkulMhs2[0]['kode_matkul'],
+                    'nim_mahasiswa' => $x['nim'],
+                    'keterangan' => 'berlangsung'
+                ]);
+            }
+            $i++;
         }
 
         return redirect('admin/mahasiswa');
