@@ -40,9 +40,14 @@ class LoginController extends BaseController
             if (password_verify($password, $mahasiswa[0]->password)) {
                 session()->set([
                     'name' => $mahasiswa[0]->name,
-                    'login' => true
+                    'email' => $mahasiswa[0]->email,
+                    'kode_jurusan' => $mahasiswa[0]->kode_jurusan,
+                    'id_kelas' => $mahasiswa[0]->id_kelas,
+                    'picture' => $mahasiswa[0]->picture,
+                    'nim' => $mahasiswa[0]->nim,
+                    'login_mahasiswa' => true
                 ]);
-                return redirect()->to(base_url('admin'));
+                return redirect()->to(base_url('mahasiswa'));
             } else {
                 session()->setFlashdata('error', 'mahasiswa');
                 return redirect()->back();

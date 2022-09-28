@@ -8,15 +8,19 @@ use App\Models\JurusanModel;
 use App\Models\MatakuliahModel;
 use App\Models\RuangModel;
 
-class DosenDashboardController extends BaseController
+class MahasiswaDashboardController extends BaseController
 {
     public function index()
     {
-        return view('dosen/index_dosen', [
-            "title" => "dosen"
+        $kelas = new DaftarKelasModel();
+        $dataKelas = $kelas->where('id', session()->get('id_kelas'))->first();
+        return view('mahasiswa/index_mahasiswa', [
+            "title" => "mahasiswa",
+            "kelas" => $dataKelas
         ]);
     }
-    public function jadwalDosen()
+
+    public function jadwalMahasiswa()
     {
         $matkul = new MatakuliahModel();
         $jurusan = new JurusanModel();

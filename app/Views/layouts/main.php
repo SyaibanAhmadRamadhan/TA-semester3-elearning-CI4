@@ -102,7 +102,7 @@
         <link href="<?= base_url('build/css/custom.min.css') ?>" rel="stylesheet">
         <script src="<?= base_url('js/jquery-3.3.1.min.js') ?>"></script>
         <link href='https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css' rel="stylesheet" />
-    <?php elseif (esc($title) == 'dosen') : ?>
+    <?php elseif (esc($title) == 'dosen' || esc($title) == 'mahasiswa') : ?>
         <!-- Bootstrap -->
         <link href="<?= base_url('vendors/bootstrap/dist/css/bootstrap.min.css') ?>" rel="stylesheet">
         <!-- Font Awesome -->
@@ -121,7 +121,16 @@
 
         <!-- Custom Theme Style -->
         <link href="<?= base_url('build/css/custom.min.css') ?>" rel="stylesheet">
-    <?php elseif (esc($title) == 'jadwalDosen') : ?>
+    <?php elseif (esc($title) == 'jadwalDosen' || esc($title) == 'jadwalMahasiswa') : ?>
+        <!-- Bootstrap -->
+        <link href="<?= base_url('vendors/bootstrap/dist/css/bootstrap.min.css') ?>" rel="stylesheet">
+        <!-- Font Awesome -->
+        <link href="<?= base_url('vendors/font-awesome/css/font-awesome.min.css') ?>" rel="stylesheet">
+        <!-- NProgress -->
+        <link href="<?= base_url('vendors/nprogress/nprogress.css') ?>" rel="stylesheet">
+
+        <!-- Custom Theme Style -->
+        <link href="<?= base_url('build/css/custom.min.css') ?>" rel="stylesheet">
     <?php endif; ?>
 </head>
 
@@ -309,7 +318,7 @@
             });
         </script>
         <script src="<?= base_url('vendors/moment/min/moment.min.js') ?>"></script>
-    <?php elseif (esc($title) == 'dosen') : ?>
+    <?php elseif (esc($title) == 'dosen' || esc($title) == 'mahasiswa') : ?>
         <!-- jQuery -->
         <script src="<?= base_url('vendors/jquery/dist/jquery.min.js') ?>"></script>
         <!-- Bootstrap -->
@@ -350,7 +359,18 @@
 
         <!-- Custom Theme Scripts -->
         <script src="<?= base_url('build/js/custom.min.js') ?>"></script>
-    <?php elseif (esc($title) == 'jadwalDosen') : ?>
+    <?php elseif (esc($title) == 'jadwalDosen' || esc($title) == 'jadwalMahasiswa') : ?>
+        <!-- jQuery -->
+        <script src="<?= base_url('vendors/jquery/dist/jquery.min.js') ?>"></script>
+        <!-- Bootstrap -->
+        <script src="<?= base_url('vendors/bootstrap/dist/js/bootstrap.min.js') ?>"></script>
+        <!-- FastClick -->
+        <script src="<?= base_url('vendors/fastclick/lib/fastclick.js') ?>"></script>
+        <!-- NProgress -->
+        <script src="<?= base_url('vendors/nprogress/nprogress.js') ?>"></script>
+
+        <!-- Custom Theme Scripts -->
+        <script src="<?= base_url('build/js/custom.min.js') ?>"></script>
     <?php endif; ?>
 
 

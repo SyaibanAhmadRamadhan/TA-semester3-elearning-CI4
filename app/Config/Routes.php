@@ -74,6 +74,14 @@ $routes->group('admin', ['filter' => 'usersAuth'], function ($routes) {
 $routes->group('dosen',  ['filter' => 'dosenAuth'], function ($routes) {
     $routes->get('/', 'DosenDashboardController::index');
     $routes->get('jadwalDosen', 'DosenDashboardController::jadwalDosen');
+    $routes->add('jadwalDosen/(:segment)/kelas', 'DosenDashboardController::ruangKelas/$1');
+});
+
+// mahasiswa
+$routes->group('mahasiswa',  ['filter' => 'mahasiswaAuth'], function ($routes) {
+    $routes->get('/', 'MahasiswaDashboardController::index');
+    $routes->get('jadwalMahasiswa', 'MahasiswaDashboardController::jadwalMahasiswa');
+    $routes->add('jadwalMahasiswa/(:segment)/kelas', 'MahasiswaDashboardController::ruangKelas/$1');
 });
 /**
  * --------------------------------------------------------------------
