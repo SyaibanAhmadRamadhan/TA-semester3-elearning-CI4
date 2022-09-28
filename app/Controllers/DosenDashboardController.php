@@ -45,4 +45,11 @@ class DosenDashboardController extends BaseController
             "daftarKelas" => $dataDaftarKelas,
         ]);
     }
+
+    public function ruangKelas($id)
+    {
+        return view('dosen/kelas_dosen', [
+            "title" => "kelasDosen",
+        ]);
+    }
 }

@@ -46,7 +46,7 @@
                                         <div class="col-md-4 col-sm-4 col-xs-12 profile_details">
                                             <div class="well profile_view">
                                                 <div class="col-sm-12">
-                                                    <div class="col-xs-12 bottom text-center">
+                                                    <div class="col-xs-12 text-center">
                                                         <h3 class="brief text-center"><?= $x['name_matkul'] ?></h3><br>
                                                         <h4 class="brief text-center"><i><?= $x['hari'] ?> - <?= $x['masuk'] ?>-<?= $x['selesai'] ?></i></h4>
                                                         <h4 class="brief text-center"><i><?= $jurusan[$i][0]['name_jurusan'] ?></i></h4>
@@ -63,7 +63,7 @@
                                                 </div>
                                                 <div class="col-xs-12 bottom text-center">
                                                     <div class="row">
-                                                        <a class="btn btn-success btn-xs" href=""> Masuk Kelas</a>
+                                                        <a class="btn btn-success btn-xs" href="<?= base_url('/dosen/jadwalDosen/' . $x['kode_matkul'] . '/kelas') ?>"> Masuk Kelas</a>
                                                         <a class="btn btn-primary btn-xs" href=""> Materi</a>
                                                     </div>
                                                 </div>

@@ -25,6 +25,7 @@ class Filters extends BaseConfig
         'secureheaders' => SecureHeaders::class,
         'usersAuth'     => \App\Filters\AuthFilter::class,
         'dosenAuth'     => \App\Filters\DosenFilter::class,
+        'mahasiswaAuth'     => \App\Filters\MahasiwaFilter::class,
     ];
 
     /**
