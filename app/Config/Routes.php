@@ -70,6 +70,11 @@ $routes->group('admin', ['filter' => 'usersAuth'], function ($routes) {
     $routes->get('matakuliah/(:segment)/delete', 'MatakuliahController::deleteMatakuliah/$1');
 });
 
+// dosen
+$routes->group('dosen',  ['filter' => 'dosenAuth'], function ($routes) {
+    $routes->get('/', 'DosenDashboardController::index');
+    $routes->get('jadwalDosen', 'DosenDashboardController::jadwalDosen');
+});
 /**
  * --------------------------------------------------------------------
  * Additional Routing

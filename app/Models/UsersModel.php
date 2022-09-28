@@ -31,4 +31,11 @@ class UsersModel extends Model
             ->where('nim_mahasiswa', $id)
             ->get()->getResultObject();
     }
+    public function dosen($id)
+    {
+        return $this->db->table('user')
+            ->join('dosen', 'user.nip_dosen=dosen.nip')
+            ->where('nip_dosen', $id)
+            ->get()->getResultObject();
+    }
 }

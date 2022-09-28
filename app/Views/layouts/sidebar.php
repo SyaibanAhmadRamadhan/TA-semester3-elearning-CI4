@@ -21,38 +21,50 @@
         <br />
 
         <!-- sidebar menu -->
-        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-            <div class="menu_section">
-                <h3>General</h3>
-                <ul class="nav side-menu">
-                    <li><a href="<?= base_url('/admin') ?>"><i class="fa fa-home"></i>Dashboard</a></li>
-                    <li><a><i class="fa fa-edit"></i> Mahasiswa <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li><a href="<?= base_url('/admin/mahasiswa/add') ?>">Add Mahasiswa</a></li>
-                            <li><a href="<?= base_url('/admin/mahasiswa') ?>">Data Mahasiswa</a></li>
-                        </ul>
-                    </li>
-                    <li><a><i class="fa fa-desktop"></i> Dosen <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li><a href="<?= base_url('admin/dosen/add') ?>">Add Dosen</a></li>
-                            <li><a href="<?= base_url('admin/dosen') ?>">Data Dosen</a></li>
-                        </ul>
-                    </li>
-                    <li><a><i class="fa fa-table"></i> Mata Kuliah <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li><a href="<?= base_url('admin/matakuliah/add') ?>">Add MataKuliah</a></li>
-                            <li><a href="<?= base_url('admin/matakuliah') ?>">Data MataKuliah</a></li>
-                        </ul>
-                    </li>
-                    <li><a><i class="fa fa-table"></i> Jurusan <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li><a href="<?= base_url('admin/jurusan/add') ?>">Add Jurusan</a></li>
-                            <li><a href="<?= base_url('admin/jurusan') ?>">Data Jurusan</a></li>
-                        </ul>
-                    </li>
-                </ul>
+        <?php if (session()->get('login')) : ?>
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                <div class="menu_section">
+                    <h3>General</h3>
+                    <ul class="nav side-menu">
+                        <li><a href="<?= base_url('/admin') ?>"><i class="fa fa-home"></i>Dashboard</a></li>
+                        <li><a><i class="fa fa-edit"></i> Mahasiswa <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li><a href="<?= base_url('/admin/mahasiswa/add') ?>">Add Mahasiswa</a></li>
+                                <li><a href="<?= base_url('/admin/mahasiswa') ?>">Data Mahasiswa</a></li>
+                            </ul>
+                        </li>
+                        <li><a><i class="fa fa-desktop"></i> Dosen <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li><a href="<?= base_url('admin/dosen/add') ?>">Add Dosen</a></li>
+                                <li><a href="<?= base_url('admin/dosen') ?>">Data Dosen</a></li>
+                            </ul>
+                        </li>
+                        <li><a><i class="fa fa-table"></i> Mata Kuliah <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li><a href="<?= base_url('admin/matakuliah/add') ?>">Add MataKuliah</a></li>
+                                <li><a href="<?= base_url('admin/matakuliah') ?>">Data MataKuliah</a></li>
+                            </ul>
+                        </li>
+                        <li><a><i class="fa fa-table"></i> Jurusan <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li><a href="<?= base_url('admin/jurusan/add') ?>">Add Jurusan</a></li>
+                                <li><a href="<?= base_url('admin/jurusan') ?>">Data Jurusan</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
+        <?php elseif (session()->get('login_dosen')) : ?>
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                <div class="menu_section">
+                    <h3>General</h3>
+                    <ul class="nav side-menu">
+                        <li><a href="<?= base_url('/dosen') ?>"><i class="fa fa-home"></i>Dashboard</a></li>
+                        <li><a href="<?= base_url('/dosen/jadwalDosen') ?>"><i class="fa fa-home"></i>Jadwal Kuliah</a></li>
+                    </ul>
+                </div>
+            </div>
+        <?php endif ?>
         <!-- /sidebar menu -->
 
         <!-- /menu footer buttons -->
