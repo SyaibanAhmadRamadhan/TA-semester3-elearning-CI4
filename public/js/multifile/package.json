@@ -1,0 +1,48 @@
+{
+  "name": "jquery-multifile",
+  "title": "jQuery MultiFile",
+  "version": "2.2.2",
+  "description": "jQuery Multiple File Selection Plugin",
+  "main": "jquery.MultiFile.js",
+  "scripts": {
+    "dev": "grunt watch",
+    "test": "grunt all test",
+    "build": "grunt build",
+    "document": "grunt doc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fyneworks/multifile"
+  },
+  "keywords": [
+    "jquery",
+    "file",
+    "upload"
+  ],
+  "author": "Fyneworks",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fyneworks/multifile/issues"
+  },
+  "homepage": "https://github.com/fyneworks/multifile",
+  "dependencies": {
+    "jquery": "~3.5.0"
+  },
+  "devDependencies": {
+    "clean-css": "^4.2.3",
+    "findup-sync": "^4.0.0",
+    "grunt": "^1.1.0",
+    "grunt-cli": "^1.3.2",
+    "grunt-contrib-cssmin": "^3.0.0",
+    "grunt-contrib-jade": "^1.0.0",
+    "grunt-contrib-uglify": "^4.0.1",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-git": "^1.0.14",
+    "grunt-sass": "^3.1.0",
+    "grunt-shell": "^3.0.1",
+    "html-minifier": "^4.0.0",
+    "node-sass": "^4.13.1",
+    "selenium-webdriver": "^4.0.0-alpha.7",
+    "uglifyjs": "^2.4.11"
+  }
+}

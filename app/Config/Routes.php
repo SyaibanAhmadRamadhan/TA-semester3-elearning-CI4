@@ -68,6 +68,7 @@ $routes->group('admin', ['filter' => 'usersAuth'], function ($routes) {
     $routes->get('matakuliah', 'MatakuliahController::dataMatakuliah');
     $routes->add('matakuliah/(:segment)/edit', 'MatakuliahController::editMatakuliah/$1');
     $routes->get('matakuliah/(:segment)/delete', 'MatakuliahController::deleteMatakuliah/$1');
+    $routes->get('matakuliah/(:segment)/download', 'MatakuliahController::downloadMateri/$1');
 });
 
 // dosen

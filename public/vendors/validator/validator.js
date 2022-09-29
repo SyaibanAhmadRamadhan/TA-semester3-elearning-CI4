@@ -47,6 +47,7 @@ var validator = (function ($) {
     kodeValidate_repeat: 'kode sudah terdaftar',
     nameValidate_repeat: 'name jurusan sudah terdaftar',
     validateName_repeat: 'name matkul sudah terdaftar',
+    validateKode_repeat: 'kode matkul sudah terdaftar',
     keluarValidasi_repeat: 'waktu keluar sudah tersedia',
     mulaiValidasi_repeat: 'waktu mulai sudah tersedia',
     repeat: 'no match',

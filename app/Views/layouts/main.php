@@ -102,6 +102,8 @@
         <link href="<?= base_url('build/css/custom.min.css') ?>" rel="stylesheet">
         <script src="<?= base_url('js/jquery-3.3.1.min.js') ?>"></script>
         <link href='https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css' rel="stylesheet" />
+
+
     <?php elseif (esc($title) == 'dosen' || esc($title) == 'mahasiswa') : ?>
         <!-- Bootstrap -->
         <link href="<?= base_url('vendors/bootstrap/dist/css/bootstrap.min.css') ?>" rel="stylesheet">
@@ -317,6 +319,7 @@
                 theme: "classic"
             });
         </script>
+        <script src="<?= base_url('js/multifile/jquery.MultiFile.js') ?>" language="javascript"></script>
         <script src="<?= base_url('vendors/moment/min/moment.min.js') ?>"></script>
     <?php elseif (esc($title) == 'dosen' || esc($title) == 'mahasiswa') : ?>
         <!-- jQuery -->

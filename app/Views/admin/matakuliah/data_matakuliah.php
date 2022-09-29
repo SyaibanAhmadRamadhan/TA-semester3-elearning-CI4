@@ -66,6 +66,7 @@
                                                 <td class="text-center">
                                                     <a href="<?= base_url('admin/matakuliah/' . $x['kode_matkul'] . '/edit') ?>" class="btn btn-sm btn-outline-secondary">Edit</a>
                                                     <a href="#" data-href="<?= base_url('admin/matakuliah/' . $x['kode_matkul'] . '/delete') ?>" onclick="confirmToDelete(this)" class="btn btn-sm btn-outline-danger">Delete</a>
+                                                    <a href="<?= base_url('admin/matakuliah/' . $x['kode_matkul'] . '/download') ?>" class="btn btn-sm btn-outline-secondary">Download</a>
                                                 </td>
                                             </tr>
                                         <?php $i++;
