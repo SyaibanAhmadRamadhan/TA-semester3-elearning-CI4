@@ -60,6 +60,10 @@ class MataKuliah extends Migration
                 'null' => true,
                 'unsigned'       => true,
             ],
+            'materi' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+            ],
             'created_at' => [
                 'type'           => 'DATETIME',
                 'null'            => true,

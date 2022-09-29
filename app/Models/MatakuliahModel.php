@@ -11,7 +11,7 @@ class MatakuliahModel extends Model
     protected $primaryKey       = 'kode_matkul';
     protected $useAutoIncrement = true;
     protected $allowedFields    = [
-        'kode_matkul', 'name_matkul', 'semester', 'sks', 'no_ruang', 'kode_jurusan', 'nip_dosen', 'id_daftar_kelas', 'hari', 'masuk', 'selesai'
+        'kode_matkul', 'name_matkul', 'semester', 'sks', 'no_ruang', 'kode_jurusan', 'nip_dosen', 'id_daftar_kelas', 'hari', 'masuk', 'selesai', 'materi'
     ];
     protected $useTimestamps = true;
 }
