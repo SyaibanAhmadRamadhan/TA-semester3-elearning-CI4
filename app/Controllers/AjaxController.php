@@ -67,6 +67,17 @@ class AjaxController extends BaseController
 				echo json_encode($response);
 			}
 		}
+		if ($this->request->getVar('action') == 'kode') {
+			if ($matkul->where('kode_matkul', $this->request->getVar('kode'))->first()) {
+				$response['data1'] = 'kode matkul sudah tersedia';
+				$response['token'] = csrf_hash();
+				echo json_encode($response);
+			} else {
+				$response['data1'] = '';
+				$response['token'] = csrf_hash();
+				echo json_encode($response);
+			}
+		}
 
 		if ($this->request->getVar('action') == 'no_ruang') {
 			if ($matkul->where('no_ruang', $this->request->getVar('no_ruang_val'))->findAll()) {
@@ -125,6 +136,23 @@ class AjaxController extends BaseController
 		if ($this->request->getVar('action') == 'name') {
 			if ($matkul->where('name_matkul', $this->request->getVar('name'))->first()) {
 				if ($matkul->where(['name_matkul' => $this->request->getVar('name'), 'kode_matkul' => $this->request->getVar('kode_matkul')])->first()) {
+					$response['data1'] = '';
+					$response['token'] = csrf_hash();
+					echo json_encode($response);
+				} else {
+					$response['data1'] = 'nama matkul sudah tersedia';
+					$response['token'] = csrf_hash();
+					echo json_encode($response);
+				}
+			} else {
+				$response['data1'] = '';
+				$response['token'] = csrf_hash();
+				echo json_encode($response);
+			}
+		}
+		if ($this->request->getVar('action') == 'kode') {
+			if ($matkul->where('kode_matkul', $this->request->getVar('kode'))->first()) {
+				if ($matkul->where(['created_at' => $this->request->getVar('created_at'), 'kode_matkul' => $this->request->getVar('kode')])->first()) {
 					$response['data1'] = '';
 					$response['token'] = csrf_hash();
 					echo json_encode($response);
