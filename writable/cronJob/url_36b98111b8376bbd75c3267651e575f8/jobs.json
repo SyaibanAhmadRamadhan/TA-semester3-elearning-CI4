@@ -1,0 +1,38 @@
+[
+    {
+        "name": "url_36b98111b8376bbd75c3267651e575f8",
+        "type": "url",
+        "action": "http:\/\/localhost:8080\/dosen\/jadwalDosen",
+        "environment": "[]",
+        "start_at": "2022-10-02 15:45:52",
+        "end_at": "2022-10-02 15:45:52",
+        "duration": "00:00:00",
+        "output": "",
+        "error": "null",
+        "test_time": null
+    },
+    {
+        "name": "url_36b98111b8376bbd75c3267651e575f8",
+        "type": "url",
+        "action": "http:\/\/localhost:8080\/dosen\/jadwalDosen",
+        "environment": "[]",
+        "start_at": "2022-10-02 15:45:43",
+        "end_at": "2022-10-02 15:45:43",
+        "duration": "00:00:00",
+        "output": "",
+        "error": "null",
+        "test_time": null
+    },
+    {
+        "name": "url_36b98111b8376bbd75c3267651e575f8",
+        "type": "url",
+        "action": "http:\/\/localhost:8080\/dosen\/jadwalDosen",
+        "environment": "[]",
+        "start_at": "2022-10-02 15:45:20",
+        "end_at": "2022-10-02 15:45:20",
+        "duration": "00:00:00",
+        "output": "",
+        "error": "null",
+        "test_time": null
+    }
+]

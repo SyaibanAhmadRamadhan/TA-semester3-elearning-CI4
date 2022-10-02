@@ -29,7 +29,7 @@
 
         <!-- Custom Theme Style -->
         <link href="<?= base_url('build/css/custom.min.css') ?>" rel="stylesheet">
-    <?php elseif (esc($title) == 'dataMahasiswa' || esc($title) == 'dataDosen' || esc($title) == 'dataJurusan' || esc($title) == 'dataMatakuliah') : ?>
+    <?php elseif (esc($title) == 'dataMahasiswa' || esc($title) == 'dataDosen' || esc($title) == 'dataJurusan' || esc($title) == 'dataMatakuliah' || esc($title) == 'kelasDosen') : ?>
         <!-- Bootstrap -->
         <link href="<?= base_url('vendors/bootstrap/dist/css/bootstrap.min.css') ?>" rel="stylesheet">
         <!-- Font Awesome -->
@@ -44,7 +44,7 @@
         <link href="<?= base_url('vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css') ?> " rel="stylesheet">
         <link href="<?= base_url('vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css') ?> " rel="stylesheet">
         <link href="<?= base_url('vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css') ?> " rel="stylesheet">
-
+        <script src="<?= base_url('js/jquery-3.3.1.min.js') ?>"></script>
         <!-- Custom Theme Style -->
         <link href="<?= base_url('build/css/custom.min.css') ?>" rel="stylesheet">
     <?php elseif (esc($title) == 'addMahasiswa' || esc($title) == 'editMahasiswa') : ?>
@@ -182,7 +182,7 @@
         <!-- Custom Theme Scripts -->
         <script src="<?= base_url('build/js/custom.min.js') ?>"></script>
 
-    <?php elseif (esc($title) == 'dataMahasiswa' || esc($title) == 'dataDosen'  || esc($title) == 'dataJurusan' || esc($title) == 'dataMatakuliah') : ?>
+    <?php elseif (esc($title) == 'dataMahasiswa' || esc($title) == 'dataDosen'  || esc($title) == 'dataJurusan' || esc($title) == 'dataMatakuliah' || esc($title) == 'kelasDosen') : ?>
         <!-- jQuery -->
         <script src="<?= base_url('vendors/jquery/dist/jquery.min.js') ?>"></script>
         <!-- Bootstrap -->
@@ -209,6 +209,7 @@
         <script src="<?= base_url('vendors/jszip/dist/jszip.min.js') ?>"></script>
         <script src="<?= base_url('vendors/pdfmake/build/pdfmake.min.js') ?>"></script>
         <script src="<?= base_url('vendors/pdfmake/build/vfs_fonts.js') ?>"></script>
+
         <!-- Custom Theme Scripts -->
         <script src="<?= base_url('build/js/custom.min.js') ?>"></script>
     <?php elseif (esc($title) == 'addMahasiswa' || esc($title) == 'editMahasiswa') : ?>

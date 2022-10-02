@@ -11,12 +11,10 @@ class Kelas extends Seeder
         $admin = [
             [
                 'name_kelas' => '19.2B.01',
-                'ruang' => '304',
                 'semester' => 'semester1'
             ],
             [
                 'name_kelas' => '19.3B.12',
-                'ruang' => '1621',
                 'semester' => 'semester3'
             ]
         ];

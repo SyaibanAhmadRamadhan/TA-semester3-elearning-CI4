@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\AbsensiDosenModel;
 use App\Models\DaftarKelasModel;
 use App\Models\DesaModel;
 use App\Models\DosenModel;
@@ -15,6 +16,18 @@ use App\Models\Sekolah;
 
 class AjaxController extends BaseController
 {
+
+	function rangkumanMatkul()
+	{
+		$absen = new AbsensiDosenModel();
+		$absen->where(['kode_matkul' => $this->request->getVar('kode_matkul'), 'tanggal_masuk' => $this->request->getVar('tanggal_masuk')])->update($this->request->getVar('id_absen'), [
+			'rangkuman' => $this->request->getVar('rangkuman')
+		]);
+
+		$data['data1'] = 'sukses';
+		$data['token'] = csrf_hash();
+		echo json_encode($data);
+	}
 
 	function matakuliah()
 	{

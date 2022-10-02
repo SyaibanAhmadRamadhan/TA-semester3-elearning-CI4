@@ -31,6 +31,9 @@
         <div class="login_wrapper">
             <div class="animate form login_form">
                 <section class="login_content">
+                    <?php if (session()->getFlashdata('error')) : ?>
+                        <div class="alert alert-danger"><?= session()->getFlashdata('error') ?></div>
+                    <?php endif; ?>
                     <form action="<?= base_url('login') ?>" method="post">
                         <?= csrf_field(); ?>
                         <h1>Login Form</h1>

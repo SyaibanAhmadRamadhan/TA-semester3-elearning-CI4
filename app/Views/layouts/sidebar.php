@@ -5,7 +5,6 @@
         </div>
 
         <div class="clearfix"></div>
-
         <!-- menu profile quick info -->
         <div class="profile clearfix">
             <div class="profile_pic">
@@ -51,6 +50,7 @@
                                 <li><a href="<?= base_url('admin/jurusan') ?>">Data Jurusan</a></li>
                             </ul>
                         </li>
+                        <li><a href="<?= base_url('/admin/absenDosen') ?>"><i class="fa fa-home"></i>Absen Dosen</a></li>
                     </ul>
                 </div>
             </div>

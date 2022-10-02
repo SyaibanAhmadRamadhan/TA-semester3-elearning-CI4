@@ -24,13 +24,14 @@ class LoginController extends BaseController
         $mahasiswa = $user->mahasiswa($nim);
         $admin = $user->admin($nim);
         $dosen = $user->dosen($nim);
-
         if ($admin) {
             if (password_verify($password, $admin[0]->password)) {
                 session()->set([
                     'name' => $admin[0]->email,
                     'login' => true
                 ]);
+                // print_r(session()->get());
+                // die;
                 return redirect()->to(base_url('admin'));
             } else {
                 session()->setFlashdata('error', 'admin');

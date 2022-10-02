@@ -52,6 +52,7 @@ $routes->group('admin', ['filter' => 'usersAuth'], function ($routes) {
     // dosen
     $routes->add('dosen/add', 'DosenController::addDosen');
     $routes->get('dosen', 'DosenController::dataDosen');
+    $routes->get('absenDosen', 'DosenController::dataDosen');
     $routes->get('dosen/(:segment)/detail', 'DosenController::detailDosen/$1');
     $routes->add('dosen/(:segment)/edit', 'DosenController::editDosen/$1');
     $routes->get('dosen/(:segment)/delete', 'DosenController::deleteDosen/$1');
@@ -75,6 +76,8 @@ $routes->group('admin', ['filter' => 'usersAuth'], function ($routes) {
 $routes->group('dosen',  ['filter' => 'dosenAuth'], function ($routes) {
     $routes->get('/', 'DosenDashboardController::index');
     $routes->get('jadwalDosen', 'DosenDashboardController::jadwalDosen');
+    $routes->post('absensiDosen', 'DosenDashboardController::absensiDosen');
+    $routes->post('rangkumanDosen', 'DosenDashboardController::rangkumanDosen');
     $routes->add('jadwalDosen/(:segment)/kelas', 'DosenDashboardController::ruangKelas/$1');
 });
 

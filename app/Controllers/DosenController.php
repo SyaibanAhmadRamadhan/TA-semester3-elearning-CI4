@@ -237,4 +237,8 @@ class DosenController extends BaseController
         $dosen->delete($id);
         return redirect('admin/dosen');
     }
+
+    public function absenDosen()
+    {
+    }
 }
