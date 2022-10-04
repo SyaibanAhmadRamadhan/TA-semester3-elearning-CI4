@@ -78,7 +78,9 @@ $routes->group('dosen',  ['filter' => 'dosenAuth'], function ($routes) {
     $routes->get('jadwalDosen', 'DosenDashboardController::jadwalDosen');
     $routes->post('absensiDosen', 'DosenDashboardController::absensiDosen');
     $routes->post('rangkumanDosen', 'DosenDashboardController::rangkumanDosen');
-    $routes->add('jadwalDosen/(:segment)/kelas', 'DosenDashboardController::ruangKelas/$1');
+    $routes->get('jadwalDosen/(:segment)/kelasPost', 'DosenDashboardController::ruangKelas/$1');
+    $routes->get('jadwalDosen/(:segment)/kelas', 'DosenDashboardController::ruangKelasView/$1');
+    $routes->get('matakuliah/(:segment)/download', 'MatakuliahController::downloadMateri/$1');
 });
 
 // mahasiswa

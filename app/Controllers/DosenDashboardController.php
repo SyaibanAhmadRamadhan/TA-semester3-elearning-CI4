@@ -88,59 +88,104 @@ class DosenDashboardController extends BaseController
             }
             return $hari_ini;
         }
-
         $absen = new AbsensiDosenModel();
         $matkul = new MatakuliahModel();
         $dataMatkul = $matkul->where('kode_matkul', $id)->first();
         $dataAbsen = $absen->where(['kode_matkul' => $dataMatkul['kode_matkul']])->findAll();
-        $dataAbsenLatest = $absen->where(['kode_matkul' => $dataMatkul['kode_matkul']])->orderBy('id', 'desc')->first();
+        // $dataAbsenLatest = $absen->where(['kode_matkul' => $dataMatkul['kode_matkul']])->orderBy('id', 'desc')->first();
         date_default_timezone_set('Asia/Jakarta');
         if (!$dataAbsen) {
-            if ($dataMatkul['hari'] == hari_ini()) {
-                if (date('H:i') > $dataMatkul['masuk'] && date('H:i') < $dataMatkul['selesai']) {
-                    $absen->insert([
-                        'nip_dosen' => $dataMatkul['nip_dosen'],
-                        'kode_matkul' => $dataMatkul['kode_matkul'],
-                        'rangkuman' => '',
-                        'tanggal_masuk' => date('Y-m-d'),
-                        'status' => 'tidak hadir',
-                        'keterangan' => 'berlangsung',
-                        'pertemuan' => 'pertemuan ke - ' . count($dataAbsen) + 1,
-                    ]);
-                } elseif (date('H:i') > $dataMatkul['selesai']) {
-                    $absen->set([
-                        'keterangan' => 'selesai'
-                    ]);
-                    $absen->where('keterangan', 'berlangsung')->first();
-                    $absen->update();
-                }
-            }
-        } elseif ($dataAbsenLatest['tanggal_masuk'] == date('Y-m-d')) {
-            if ($dataMatkul['hari'] == hari_ini()) {
-                if (date('H:i') > $dataMatkul['masuk'] && date('H:i') < $dataMatkul['selesai']) {
-                    $absen->insert([
-                        'nip_dosen' => $dataMatkul['nip_dosen'],
-                        'kode_matkul' => $dataMatkul['kode_matkul'],
-                        'rangkuman' => '',
-                        'tanggal_masuk' => date('Y-m-d'),
-                        'status' => 'tidak hadir',
-                        'pertemuan' => 'pertemuan ke - ' . count($dataAbsen) + 1,
-                    ]);
-                } elseif (date('H:i') > $dataMatkul['selesai']) {
-
-                    $absen->set([
-                        'keterangan' => 'selesai'
-                    ]);
-                    $absen->where('keterangan', 'berlangsung')->first();
-                    $absen->update();
+            $validateAbsen1 = $absen->where(['kode_matkul' => $dataMatkul['kode_matkul'], 'keterangan' => 'selesai'])->first();
+            $validateAbsen = $absen->where(['kode_matkul' => $dataMatkul['kode_matkul'], 'keterangan' => 'berlangsung'])->first();
+            if (!$validateAbsen && !$validateAbsen1) {
+                if ($dataMatkul['hari'] == hari_ini()) {
+                    if (date('H:i') > $dataMatkul['masuk'] && date('H:i') < $dataMatkul['selesai']) {
+                        $absen->insert([
+                            'nip_dosen' => $dataMatkul['nip_dosen'],
+                            'kode_matkul' => $dataMatkul['kode_matkul'],
+                            'rangkuman' => '',
+                            'tanggal_masuk' => date('Y-m-d'),
+                            'status' => 'tidak hadir',
+                            'pertemuan' => 'pertemuan ke - ' . count($dataAbsen) + 1,
+                        ]);
+                    } elseif (date('H:i') > $dataMatkul['selesai']) {
+                        $absen->set([
+                            'keterangan' => 'selesai'
+                        ]);
+                        $absen->where('keterangan', 'berlangsung')->first();
+                        $absen->update();
+                    }
                 }
             }
         }
+        // elseif ($dataAbsenLatest['tanggal_masuk'] == date('Y-m-d')) {
+        //     $validateAbsen = $absen->where(['kode_matkul' => $dataMatkul['kode_matkul'], 'keterangan' => 'berlangsung', 'tanggal_masuk' => date('Y-m-d')])->first();
+        //     $validateAbsen1 = $absen->where(['kode_matkul' => $dataMatkul['kode_matkul'], 'keterangan' => 'selesai', 'tanggal_masuk' => date('Y-m-d')])->first();
+        //     if (!$validateAbsen && !$validateAbsen1) {
+        //         if ($dataMatkul['hari'] == hari_ini()) {
+        //             if (date('H:i') > $dataMatkul['masuk'] && date('H:i') < $dataMatkul['selesai']) {
+        //                 $absen->insert([
+        //                     'nip_dosen' => $dataMatkul['nip_dosen'],
+        //                     'kode_matkul' => $dataMatkul['kode_matkul'],
+        //                     'rangkuman' => '',
+        //                     'tanggal_masuk' => date('Y-m-d'),
+        //                     'status' => 'tidak hadir',
+        //                     'pertemuan' => 'pertemuan ke - ' . count($dataAbsen) + 1,
+        //                 ]);
+        //             } elseif (date('H:i') > $dataMatkul['selesai']) {
+        //                 $absen->set([
+        //                     'keterangan' => 'selesai'
+        //                 ]);
+        //                 $absen->where('keterangan', 'berlangsung')->first();
+        //                 $absen->update();
+        //             }
+        //         }
+        //     }
+        // }
+        else {
+            $validateAbsen = $absen->where(['kode_matkul' => $dataMatkul['kode_matkul'], 'keterangan' => 'berlangsung', 'tanggal_masuk' => date('Y-m-d')])->first();
+            $validateAbsen1 = $absen->where(['kode_matkul' => $dataMatkul['kode_matkul'], 'keterangan' => 'selesai', 'tanggal_masuk' => date('Y-m-d')])->first();
+            if (!$validateAbsen && !$validateAbsen1) {
+                if ($dataMatkul['hari'] == hari_ini()) {
+                    if (date('H:i') > $dataMatkul['masuk'] && date('H:i') < $dataMatkul['selesai']) {
+                        $absen->insert([
+                            'nip_dosen' => $dataMatkul['nip_dosen'],
+                            'kode_matkul' => $dataMatkul['kode_matkul'],
+                            'rangkuman' => '',
+                            'tanggal_masuk' => date('Y-m-d'),
+                            'status' => 'tidak hadir',
+                            'pertemuan' => 'pertemuan ke - ' . count($dataAbsen) + 1,
+                        ]);
+                    } elseif (date('H:i') > $dataMatkul['selesai']) {
+                        $absen->set([
+                            'keterangan' => 'selesai'
+                        ]);
+                        $absen->where('keterangan', 'berlangsung')->first();
+                        $absen->update();
+                    }
+                }
+            }
+        }
+        return redirect()->to('/dosen/jadwalDosen/1235/kelas');
+    }
 
+    public function ruangKelasView($id)
+    {
+        $absen = new AbsensiDosenModel();
+        $matkul = new MatakuliahModel();
+        $dataMatkul = $matkul->where('kode_matkul', $id)->first();
+        if ($absen->where(['kode_matkul' => $id, 'keterangan' => 'berlangsung'])->first()) {
+            $dataMatkulHadir = $absen->where(['kode_matkul' => $id, 'keterangan' => 'berlangsung'])->first();
+        } else {
+            $dataMatkulHadir = ['status' => 'tidak hadir'];
+        }
+        $dataAbsen = $absen->where(['kode_matkul' => $dataMatkul['kode_matkul']])->findAll();
+        date_default_timezone_set('Asia/Jakarta');
         return view('dosen/kelas_dosen', [
             "title" => "kelasDosen",
             'absen' => $dataAbsen,
-            'matkul' => $dataMatkul
+            'matkul' => $dataMatkul,
+            'matkulHadir' => $dataMatkulHadir
         ]);
     }
 

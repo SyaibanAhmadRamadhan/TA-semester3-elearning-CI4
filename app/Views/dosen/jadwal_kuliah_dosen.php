@@ -63,7 +63,7 @@
                                                 </div>
                                                 <div class="col-xs-12 bottom text-center">
                                                     <div class="row">
-                                                        <a class="btn btn-success btn-xs" href="<?= base_url('/dosen/jadwalDosen/' . $x['kode_matkul'] . '/kelas') ?>"> Masuk Kelas</a>
+                                                        <a class="btn btn-success btn-xs" href="<?= base_url('/dosen/jadwalDosen/' . $x['kode_matkul'] . '/kelasPost') ?>"> Masuk Kelas</a>
                                                         <a class="btn btn-primary btn-xs" href=""> Materi</a>
                                                     </div>
                                                 </div>
