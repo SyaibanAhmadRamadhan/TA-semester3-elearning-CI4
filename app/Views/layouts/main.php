@@ -29,7 +29,7 @@
 
         <!-- Custom Theme Style -->
         <link href="<?= base_url('build/css/custom.min.css') ?>" rel="stylesheet">
-    <?php elseif (esc($title) == 'dataMahasiswa' || esc($title) == 'dataDosen' || esc($title) == 'dataJurusan' || esc($title) == 'dataMatakuliah' || esc($title) == 'kelasDosen') : ?>
+    <?php elseif (esc($title) == 'dataMahasiswa' || esc($title) == 'dataDosen' || esc($title) == 'dataJurusan' || esc($title) == 'dataMatakuliah' || esc($title) == 'kelasDosen' || esc($title) == 'kelasMahasiswa') : ?>
         <!-- Bootstrap -->
         <link href="<?= base_url('vendors/bootstrap/dist/css/bootstrap.min.css') ?>" rel="stylesheet">
         <!-- Font Awesome -->
@@ -182,7 +182,7 @@
         <!-- Custom Theme Scripts -->
         <script src="<?= base_url('build/js/custom.min.js') ?>"></script>
 
-    <?php elseif (esc($title) == 'dataMahasiswa' || esc($title) == 'dataDosen'  || esc($title) == 'dataJurusan' || esc($title) == 'dataMatakuliah' || esc($title) == 'kelasDosen') : ?>
+    <?php elseif (esc($title) == 'dataMahasiswa' || esc($title) == 'dataDosen'  || esc($title) == 'dataJurusan' || esc($title) == 'dataMatakuliah' || esc($title) == 'kelasDosen' || esc($title) == 'kelasMahasiswa') : ?>
         <!-- jQuery -->
         <script src="<?= base_url('vendors/jquery/dist/jquery.min.js') ?>"></script>
         <!-- Bootstrap -->

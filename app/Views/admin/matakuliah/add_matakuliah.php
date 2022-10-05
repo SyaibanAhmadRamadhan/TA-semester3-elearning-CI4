@@ -13,18 +13,7 @@
             <div class="">
                 <div class="page-title">
                     <div class="title_left">
-                        <h3>Add Mahasiswa</h3>
-                    </div>
-
-                    <div class="title_right">
-                        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search for...">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">Go!</button>
-                                </span>
-                            </div>
-                        </div>
+                        <h3>Add Matakuliah</h3>
                     </div>
                 </div>
                 <div class="clearfix"></div>
@@ -59,52 +48,6 @@
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                             <input type="tel" class="form-control col-md-7 col-xs-12" required="required" id="sks" name="sks" placeholder="Enter a jumlah sks..">
-                                        </div>
-                                    </div>
-                                    <div class="item form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="no_ruang">no ruangan <span class="required">*</span>
-                                        </label>
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <select class="form-control filter_wilayah" id="no_ruang" name="no_ruang" required="required" type="select">
-                                                <option value="">Select ruangan</option>
-                                                <?php
-                                                foreach ($ruang as $x) {
-                                                    echo '<option value="' . $x['id'] . '">' . $x['no_ruang'] . '</option>';
-                                                }
-                                                ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group item pmd-textfield pmd-textfield-floating-label">
-                                        <input type="hidden" name="mulaiValidasi" id="mulaiValidasi">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sks">Jadwal Masuk <span class="required">*</span>
-                                        </label>
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <input type="time" class="form-control" name="masuk" required data-validate-linked="mulaiValidasi" id="masuk" placeholder="12:10 AM">
-                                        </div>
-                                    </div>
-                                    <div class="form-group item pmd-textfield pmd-textfield-floating-label">
-                                        <input type="hidden" name="keluarValidasi" id="keluarValidasi">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="keluar">Jadwal Keluar <span class="required">*</span>
-                                        </label>
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <input type="time" class="form-control" name="keluar" required data-validate-linked="keluarValidasi" id="keluar" placeholder="12:10 AM">
-                                        </div>
-                                    </div>
-                                    <div class="item form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="hari">Hari <span class="required">*</span>
-                                        </label>
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <select class="form-control filter_wilayah" id="hari" name="hari" required="required" type="select">
-                                                <option value="">Select Hari</option>
-                                                <option value="senin">senin</option>
-                                                <option value="selasa">selasa</option>
-                                                <option value="rabu">rabu</option>
-                                                <option value="kamis">kamis</option>
-                                                <option value="jumat">jumat</option>
-                                                <option value="sabtu">sabtu</option>
-                                                <option value="minggu">minggu</option>
-                                            </select>
                                         </div>
                                     </div>
                                     <div class="item form-group">
@@ -160,10 +103,56 @@
                                         </div>
                                     </div>
                                     <div class="item form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="T7">Meteri <span class="required">*</span>
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="no_ruang">no ruangan <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <input name='materi[]' accept="pdf" data-maxsize="5120" data-maxfile="2048" type="file" multiple />
+                                            <select class="form-control filter_wilayah" id="no_ruang" name="no_ruang" required="required" type="select">
+                                                <option value="">Select ruangan</option>
+                                                <?php
+                                                foreach ($ruang as $x) {
+                                                    echo '<option value="' . $x['id'] . '">' . $x['no_ruang'] . '</option>';
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group item pmd-textfield pmd-textfield-floating-label">
+                                        <input type="hidden" name="mulaiValidasi" id="mulaiValidasi">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sks">Jadwal Masuk <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="time" class="form-control" name="masuk" required data-validate-linked="mulaiValidasi" id="masuk" placeholder="12:10 AM">
+                                        </div>
+                                    </div>
+                                    <div class="form-group item pmd-textfield pmd-textfield-floating-label">
+                                        <input type="hidden" name="keluarValidasi" id="keluarValidasi">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="keluar">Jadwal Keluar <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="time" class="form-control" name="keluar" required data-validate-linked="keluarValidasi" id="keluar" placeholder="12:10 AM">
+                                        </div>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="hari">Hari <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <select class="form-control filter_wilayah" id="hari" name="hari" required="required" type="select">
+                                                <option value="">Select Hari</option>
+                                                <option value="senin">senin</option>
+                                                <option value="selasa">selasa</option>
+                                                <option value="rabu">rabu</option>
+                                                <option value="kamis">kamis</option>
+                                                <option value="jumat">jumat</option>
+                                                <option value="sabtu">sabtu</option>
+                                                <option value="minggu">minggu</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="T7">Materi <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input required name='materi[]' accept="pdf" data-maxsize="5120" data-maxfile="2048" type="file" multiple />
                                         </div>
                                     </div>
                                     <div class="ln_solid"></div>

@@ -24,7 +24,6 @@ class DosenController extends BaseController
             'tgl_lahir' => 'required',
         ]);
 
-
         if ($isValidate) {
             $dosen = new DosenModel();
 
@@ -33,10 +32,12 @@ class DosenController extends BaseController
             $tahunnip = substr($tahun, 2);
 
             // count mhs
-            $data = $dosen->findAll();
-            $totalDosennip = sprintf("%03s", count($data) + 1);
+            $dataLatestForNip = $dosen->orderBy('nip', 'desc')->first();
+            $substr = substr($dataLatestForNip['nip'], 2);
+            $latestNim = sprintf("%03s", $substr + 1);
 
-            $nip = $tahunnip . $totalDosennip;
+
+            $nip = $tahunnip . $latestNim;
 
             $name = explode(" ", $this->request->getPost('name'));
             $kode = "";

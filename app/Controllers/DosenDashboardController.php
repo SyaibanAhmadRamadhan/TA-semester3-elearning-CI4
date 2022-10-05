@@ -92,7 +92,17 @@ class DosenDashboardController extends BaseController
         $matkul = new MatakuliahModel();
         $dataMatkul = $matkul->where('kode_matkul', $id)->first();
         $dataAbsen = $absen->where(['kode_matkul' => $dataMatkul['kode_matkul']])->findAll();
-        // $dataAbsenLatest = $absen->where(['kode_matkul' => $dataMatkul['kode_matkul']])->orderBy('id', 'desc')->first();
+
+        foreach ($dataAbsen as $x) {
+            date_default_timezone_set('Asia/Jakarta');
+            if ($x['tanggal_masuk'] . ' ' . $dataMatkul['selesai'] < date('Y-m-d G:i')) {
+                $absen->set([
+                    'keterangan' => 'selesai'
+                ]);
+                $absen->where('keterangan', 'berlangsung')->first();
+                $absen->update();
+            }
+        }
         date_default_timezone_set('Asia/Jakarta');
         if (!$dataAbsen) {
             $validateAbsen1 = $absen->where(['kode_matkul' => $dataMatkul['kode_matkul'], 'keterangan' => 'selesai'])->first();
@@ -166,7 +176,7 @@ class DosenDashboardController extends BaseController
                 }
             }
         }
-        return redirect()->to('/dosen/jadwalDosen/1235/kelas');
+        return redirect()->to('/dosen/jadwalDosen/' . $id . '/kelas');
     }
 
     public function ruangKelasView($id)

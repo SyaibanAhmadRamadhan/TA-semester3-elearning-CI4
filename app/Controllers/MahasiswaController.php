@@ -38,24 +38,26 @@ class MahasiswaController extends BaseController
             'tgl_lahir' => 'required',
         ]);
 
+
+
         if ($isValidate) {
             $mahasiswa = new MahasiswaModel();
-
             // nim tahun
             $tahun = date("Y");
             $tahunNim = substr($tahun, 2);
 
             // count mhs
-            $data = $mahasiswa->findAll();
-            $totalMhsNim = sprintf("%03s", count($data) + 1);
-
+            $dataLatestForNim = $mahasiswa->orderBy('nim', 'desc')->first();
+            $substr = substr($dataLatestForNim['nim'], 7);
+            $latestNim = sprintf("%03s", $substr + 1);
+            
             // jurusan
             $jurusan = $this->request->getPost('jurusan');
 
             // angkatan
             $angkatanNim = sprintf("%02s", date("Y") - 2021);
 
-            $nim = $angkatanNim . $jurusan . $tahunNim . $totalMhsNim;
+            $nim = $angkatanNim . $jurusan . $tahunNim . $latestNim;
 
 
             if ($mahasiswa->where('email', $this->request->getPost('email'))->first()) {
