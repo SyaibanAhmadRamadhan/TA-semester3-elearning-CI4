@@ -76,13 +76,13 @@ $routes->group('admin', ['filter' => 'usersAuth'], function ($routes) {
 $routes->group('dosen',  ['filter' => 'dosenAuth'], function ($routes) {
     $routes->get('/', 'DosenDashboardController::index');
     $routes->get('jadwalDosen', 'DosenDashboardController::jadwalDosen');
-    $routes->post('absensiDosen', 'DosenDashboardController::absensiDosen');
+    $routes->post('absensiDosen/(:segment)', 'DosenDashboardController::absensiDosen/$1');
     $routes->post('rangkumanDosen', 'DosenDashboardController::rangkumanDosen');
-    $routes->get('jadwalDosen/(:segment)/kelasPost', 'DosenDashboardController::ruangKelas/$1');
+    $routes->get('jadwalDosen/(:segment)/(:segment)/kelasPost', 'DosenDashboardController::ruangKelas/$1/$2');
     $routes->get('jadwalDosen/(:segment)/kelas', 'DosenDashboardController::ruangKelasView/$1');
     $routes->get('matakuliah/(:segment)/download', 'MatakuliahController::downloadMateri/$1');
 });
-
+// https://www.warungbelajar.com/mengatur-routing-di-codeigniter-4.html
 // mahasiswa
 $routes->group('mahasiswa',  ['filter' => 'mahasiswaAuth'], function ($routes) {
     $routes->get('/', 'MahasiswaDashboardController::index');

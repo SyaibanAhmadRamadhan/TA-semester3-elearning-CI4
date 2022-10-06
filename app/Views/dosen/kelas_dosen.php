@@ -61,7 +61,7 @@ function hari_ini()
                             <h2>Absensi Dosen<small>*</small></h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li>
-                                    <form method="post" action="<?= base_url('dosen/absensiDosen') ?>">
+                                    <form method="post" action="<?= base_url('dosen/absensiDosen/' . $matkul['kode_matkul']) ?>">
                                         <?= csrf_field() ?>
                                         <a href="<?= base_url('dosen/matakuliah/' . $matkul['kode_matkul'] . '/download') ?>" class="btn btn-sm btn-danger">Materi</a>
                                         <?php if ($matkul['hari'] == hari_ini()) : ?>

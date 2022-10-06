@@ -33,7 +33,7 @@ class MahasiswaDashboardController extends BaseController
         $matkulMhs = new MatakuliahMahasiswaModel();
         $dosen = new DosenModel();
 
-        $dataMatkulMhs = $matkulMhs->where('nim_mahasiswa', session()->get('nim'))->findAll();
+        $dataMatkulMhs = $matkulMhs->where(['nim_mahasiswa' => session()->get('nim'), 'keterangan' => 'berlangsung'])->findAll();
 
         if ($dataMatkulMhs) {
             foreach ($dataMatkulMhs as $x) {
@@ -63,29 +63,29 @@ class MahasiswaDashboardController extends BaseController
 
     public function ruangKelas($id)
     {
-        $absenDosen = new AbsensiDosenModel();
-        $absenMhs = new AbsensiMahasiswaModel();
-        $matkul = new MatakuliahModel();
+        // $absenDosen = new AbsensiDosenModel();
+        // $absenMhs = new AbsensiMahasiswaModel();
+        // $matkul = new MatakuliahModel();
 
-        $dataAbsenMhs = $absenMhs->where(['nim_mahasiswa' => session()->get('nim'), 'kode_matkul' => $id])->findAll();
-        $dataDosen = $absenDosen->where(['kode_matkul' => $id, 'keterangan' => 'berlangsung'])->first();
-        // print_r($dataDosen['id']);
-        // die;
-        if ($dataDosen) {
-            if ($dataDosen['status'] != 'tidak hadir') {
-                $absenMhs->insert([
-                    'nip_dosen' => $dataDosen['nip_dosen'],
-                    'kode_matkul' => $dataDosen['kode_matkul'],
-                    'absen_dosen_id' => $dataDosen['id'],
-                    'status' => 'tidak hadir',
-                    'keterangan' => 'berlangsung',
-                    'tanggal_masuk' => date('Y-m-d'),
-                    'pertemuan' => 'pertemuan ke - ' . count($dataAbsenMhs) + 1,
-                    'nim_mahasiswa' => session()->get('nim'),
-                ]);
-            } else {
-            }
-        }
+        // $dataAbsenMhs = $absenMhs->where(['nim_mahasiswa' => session()->get('nim'), 'kode_matkul' => $id])->findAll();
+        // $dataDosen = $absenDosen->where(['kode_matkul' => $id, 'keterangan' => 'berlangsung'])->first();
+        // // print_r($dataDosen['id']);
+        // // die;
+        // if ($dataDosen) {
+        //     if ($dataDosen['status'] != 'tidak hadir') {
+        //         $absenMhs->insert([
+        //             'nip_dosen' => $dataDosen['nip_dosen'],
+        //             'kode_matkul' => $dataDosen['kode_matkul'],
+        //             'absen_dosen_id' => $dataDosen['id'],
+        //             'status' => 'tidak hadir',
+        //             'keterangan' => 'berlangsung',
+        //             'tanggal_masuk' => date('Y-m-d'),
+        //             'pertemuan' => 'pertemuan ke - ' . count($dataAbsenMhs) + 1,
+        //             'nim_mahasiswa' => session()->get('nim'),
+        //         ]);
+        //     } else {
+        //     }
+        // }
 
         return redirect()->to('/mahasiswa/jadwalMahasiswa/' . $id . '/kelas');
     }
@@ -102,7 +102,11 @@ class MahasiswaDashboardController extends BaseController
         } else {
             $dataMatkulHadir = ['status' => 'tidak hadir'];
         }
-        $dataAbsenDosen = $absenDosen->where(['kode_matkul' => $dataMatkul['kode_matkul'], 'keterangan' => 'berlangsung'])->first();
+        if ($absenDosen->where(['kode_matkul' => $dataMatkul['kode_matkul'], 'keterangan' => 'berlangsung'])->first()) {
+            $dataAbsenDosen = $absenDosen->where(['kode_matkul' => $dataMatkul['kode_matkul'], 'keterangan' => 'berlangsung'])->first();
+        } else {
+            $dataAbsenDosen = ['status' => 'tidak hadir'];
+        }
         $dataAbsenMhs = $absenMhs->where(['kode_matkul' => $dataMatkul['kode_matkul'], 'nim_mahasiswa' => session()->get('nim')])->findAll();
         date_default_timezone_set('Asia/Jakarta');
 
