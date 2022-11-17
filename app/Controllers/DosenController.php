@@ -33,8 +33,12 @@ class DosenController extends BaseController
 
             // count mhs
             $dataLatestForNip = $dosen->orderBy('nip', 'desc')->first();
-            $substr = substr($dataLatestForNip['nip'], 2);
-            $latestNim = sprintf("%03s", $substr + 1);
+            if ($dataLatestForNip) {
+                $substr = substr($dataLatestForNip['nip'], 2);
+                $latestNim = sprintf("%03s", $substr + 1);
+            } else {
+                $latestNim = "001";
+            }
 
 
             $nip = $tahunnip . $latestNim;

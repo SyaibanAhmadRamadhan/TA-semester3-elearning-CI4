@@ -94,7 +94,6 @@ class DosenDashboardController extends BaseController
         $absen = new AbsensiDosenModel();
         $matkul = new MatakuliahModel();
 
-
         $dataMatkul = $matkul->where(['kode_matkul' => $id, 'id_daftar_kelas' => $kelas])->first();
         $dataAbsen = $absen->where(['kode_matkul' => $dataMatkul['kode_matkul']])->findAll();
 
@@ -304,8 +303,6 @@ class DosenDashboardController extends BaseController
         if ($dataDosen) {
             if ($dataDosen['status'] != 'tidak hadir') {
                 foreach ($dataMhsMatkul as $x) {
-                    print_r('die');
-                    die;
                     $dataAbsenMhs = $absenMhs->where(['nim_mahasiswa' => $x['nim_mahasiswa'], 'kode_matkul' => $id])->findAll();
                     $absenMhs->insert([
                         'nip_dosen' => $dataDosen['nip_dosen'],

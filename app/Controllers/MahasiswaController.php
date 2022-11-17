@@ -48,9 +48,13 @@ class MahasiswaController extends BaseController
 
             // count mhs
             $dataLatestForNim = $mahasiswa->orderBy('nim', 'desc')->first();
-            $substr = substr($dataLatestForNim['nim'], 7);
-            $latestNim = sprintf("%03s", $substr + 1);
-            
+            if ($dataLatestForNim) {
+                $substr = substr($dataLatestForNim['nim'], 7);
+                $latestNim = sprintf("%03s", $substr + 1);
+            } else {
+                $latestNim = "001";
+            }
+
             // jurusan
             $jurusan = $this->request->getPost('jurusan');
 
@@ -136,7 +140,6 @@ class MahasiswaController extends BaseController
                 'role' => 'mahasiswa',
             ]);
 
-
             $matkul = new MatakuliahModel();
             $dataMatkul = $matkul->where(['kode_jurusan' => $this->request->getPost('jurusan'), 'id_daftar_kelas' => $this->request->getPost('kelas'), 'semester' => 'semester1'])->findAll();
 
@@ -193,15 +196,24 @@ class MahasiswaController extends BaseController
         $data = $matkulMahasiswa->where(['nim_mahasiswa' => $id, 'keterangan' => 'berlangsung'])->findAll();
 
         $matkul = new MatakuliahModel();
-        foreach ($data as $x) {
-            $dataMatkul[] = $matkul->where('kode_matkul', $x['kode_matkul'])->findAll();
+        if ($data) {
+            foreach ($data as $x) {
+                $dataMatkul[] = $matkul->where('kode_matkul', $x['kode_matkul'])->findAll();
+            }
+        } else {
+            $dataMatkul = [];
         }
 
         $ruang = new RuangModel();
         $dosen = new DosenModel();
-        foreach ($dataMatkul as $x) {
-            $dataRuang[] = $ruang->where('id', $x[0]['no_ruang'])->findAll();
-            $dataDosen[] = $dosen->where('nip', $x[0]['nip_dosen'])->findAll();
+        if (count($dataMatkul) > 0) {
+            foreach ($dataMatkul as $x) {
+                $dataRuang[] = $ruang->where('id', $x[0]['no_ruang'])->findAll();
+                $dataDosen[] = $dosen->where('nip', $x[0]['nip_dosen'])->findAll();
+            }
+        } else {
+            $dataRuang = [];
+            $dataDosen = [];
         }
 
         if (!$detail) {

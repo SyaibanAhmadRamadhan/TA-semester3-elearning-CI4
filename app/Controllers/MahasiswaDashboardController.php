@@ -34,7 +34,6 @@ class MahasiswaDashboardController extends BaseController
         $dosen = new DosenModel();
 
         $dataMatkulMhs = $matkulMhs->where(['nim_mahasiswa' => session()->get('nim'), 'keterangan' => 'berlangsung'])->findAll();
-
         if ($dataMatkulMhs) {
             foreach ($dataMatkulMhs as $x) {
                 $dataMatkul[] = $matkul->where('kode_matkul', $x['kode_matkul'])->findAll();
@@ -47,8 +46,12 @@ class MahasiswaDashboardController extends BaseController
                 $kodeDosen[] = $dosen->where('nip', $x[0]['nip_dosen'])->findAll();
             }
         } else {
-            $dataMatkul[] = '';
-            $dataMatkul1[] = '';
+            $dataMatkul = [];
+            $dataMatkul1 = [];
+            $dataJurusan = [];
+            $dataRuangan = [];
+            $dataDaftarKelas = [];
+            $kodeDosen = [];
         }
 
         return view('mahasiswa/jadwal_kuliah_mahasiswa', [
@@ -104,6 +107,8 @@ class MahasiswaDashboardController extends BaseController
         }
         if ($absenDosen->where(['kode_matkul' => $dataMatkul['kode_matkul'], 'keterangan' => 'berlangsung'])->first()) {
             $dataAbsenDosen = $absenDosen->where(['kode_matkul' => $dataMatkul['kode_matkul'], 'keterangan' => 'berlangsung'])->first();
+        } elseif ($absenDosen->where(['kode_matkul' => $dataMatkul['kode_matkul'], 'keterangan' => 'selesai'])->first()) {
+            $dataAbsenDosen = $absenDosen->where(['kode_matkul' => $dataMatkul['kode_matkul'], 'keterangan' => 'selesai'])->first();
         } else {
             $dataAbsenDosen = ['status' => 'tidak hadir'];
         }
@@ -127,7 +132,7 @@ class MahasiswaDashboardController extends BaseController
             'status' => 'hadir',
             'waktu_masuk' => date('G:i')
         ]);
-        $absen->where('keterangan', 'berlangsung');
+        $absen->where(['nim_mahasiswa' => session()->get('nim'), 'keterangan' => 'berlangsung']);
         $absen->update();
         return redirect()->back();
     }

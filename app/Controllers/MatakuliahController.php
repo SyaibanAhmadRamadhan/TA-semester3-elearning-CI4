@@ -7,8 +7,11 @@ use App\Models\DaftarKelasModel;
 use App\Models\DosenModel;
 use App\Models\JurusanModel;
 use App\Models\KelasModel;
+use App\Models\MahasiswaModel;
+use App\Models\MatakuliahMahasiswaModel;
 use App\Models\MatakuliahModel;
 use App\Models\RuangModel;
+use App\Models\SemesterModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -56,6 +59,8 @@ class MatakuliahController extends BaseController
         ]);
         if ($isValidate) {
             $matkul = new MatakuliahModel();
+            $sms = new SemesterModel();
+            $matkulMhs = new MatakuliahMahasiswaModel();
             foreach ($this->request->getFileMultiple('materi') as $x) {
                 $oriFile = $x->getName();
                 $x->move('uploads/materi/' . $this->request->getPost('kode') . '/', $oriFile);
@@ -76,6 +81,16 @@ class MatakuliahController extends BaseController
                 'id_daftar_kelas' => $this->request->getPost('kelas'),
                 'materi' => $this->request->getPost('kode'),
             ]);
+            $dataSms = $sms->where(['semester' => $this->request->getPost('semester'), 'keterangan' => 'berlangsung'])->findAll();
+            if (count($dataSms) > 0) {
+                foreach ($dataSms as $key => $x) {
+                    $matkulMhs->insert([
+                        'nim_mahasiswa' => $x['nim_mahasiswa'],
+                        'kode_matkul' => $this->request->getPost('kode'),
+                        'keterangan' => 'berlangsung'
+                    ]);
+                }
+            }
             return redirect('admin/matakuliah');
         }
         $jurusan = new JurusanModel();

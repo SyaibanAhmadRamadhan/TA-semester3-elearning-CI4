@@ -58,17 +58,21 @@ function hari_ini()
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Absensi Dosen<small>*</small></h2>
+                            <h2>Absensi Mahasiswa<small>*</small></h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li>
                                     <form method="post" action="<?= base_url('mahasiswa/absensiMahasiswa') ?>">
                                         <?= csrf_field() ?>
                                         <a href="<?= base_url('mahasiswa/matakuliah/' . $matkul['kode_matkul'] . '/download') ?>" class="btn btn-sm btn-danger">Materi</a>
                                         <?php if ($matkul['hari'] == hari_ini()) : ?>
-                                            <?php if ($matkulHadir['status'] == 'hadir') : ?>
-                                                <button type="submit" class="btn btn-sm btn-primary" style="display: none;">HADIR</button>
-                                            <?php elseif ($absenDosen['status'] != 'tidak hadir') : ?>
-                                                <button type="submit" class="btn btn-sm btn-primary">MASUK</button>
+                                            <?php if ($absenDosen['status'] != 'tidak hadir' && $absenDosen['keterangan'] == 'berlangsung') : ?>
+                                                <?php if ($matkulHadir['status'] == 'hadir') : ?>
+                                                    <button type="button" class="btn btn-sm btn-primary" disabled>Sudah Hadir</button>
+                                                <?php else : ?>
+                                                    <button type="submit" class="btn btn-sm btn-primary">MASUK</button>
+                                                <?php endif ?>
+                                            <?php elseif ($absenDosen['status'] == 'hadir' && $absenDosen['keterangan'] == 'selesai') : ?>
+                                                <button disabled type="submit" class="btn btn-sm btn-primary">Sudah Selesai</button>
                                             <?php else : ?>
                                                 <button type="button" class="btn btn-sm btn-primary" disabled>BELUM MULAI</button>
                                             <?php endif ?>

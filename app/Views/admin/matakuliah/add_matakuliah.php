@@ -409,7 +409,6 @@
                             document.getElementById('mulaiValidasi').value = data2
                             document.getElementById('keluarValidasi').value = data2
                         } else {
-
                             document.getElementById('mulaiValidasi').value = document.getElementById('masuk').value;
                             document.getElementById('keluarValidasi').value = document.getElementById('keluar').value;
                         }
